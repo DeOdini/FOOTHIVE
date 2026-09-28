@@ -1,0 +1,30 @@
+﻿:root {
+  --color-ink: #1A1A1A;
+  --color-accent: #D2691E;
+  --color-muted: #8A8A8A;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #FAFAF8;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --radius: 0.25rem;
+  --max-width: 72rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
