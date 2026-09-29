@@ -632,3 +632,106 @@ a:focus-visible {
     transition: none;
   }
 }
+
+/* T05 - Story / brand block */
+.story-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-block: clamp(3rem, 8vw, 7rem);
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 6vw, 5rem);
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+
+.story-section__marker {
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.story-section__content {
+  max-width: 50rem;
+}
+
+.story-section__eyebrow {
+  margin: 0 0 var(--space-3);
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.story-section h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 900;
+  letter-spacing: -0.075em;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.story-section h2 em {
+  color: var(--color-accent);
+  font-style: normal;
+}
+
+.story-section__copy {
+  max-width: 35rem;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  color: rgb(255 255 255 / 76%);
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.story-section__copy p {
+  margin: 0;
+}
+
+.story-section__copy p + p {
+  margin-top: var(--space-3);
+}
+
+.story-section__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: var(--space-5);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--color-accent);
+  color: var(--color-surface);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.story-section__link:hover {
+  color: var(--color-accent);
+}
+
+.story-section__link:focus-visible {
+  outline-color: var(--color-surface);
+}
+
+@media (min-width: 48rem) {
+  .story-section {
+    grid-template-columns: minmax(5rem, 0.25fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-6);
+  }
+
+  .story-section__marker {
+    padding-top: 0.55rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-section__link {
+    transition: none;
+  }
+}
