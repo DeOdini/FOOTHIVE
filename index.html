@@ -8,21 +8,70 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/main.js" defer></script>
   </head>
-  <body>
-    <header>
-      <!-- Header content is added in T02. -->
+  <body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner page-width">
+        <a class="brand" href="#top" aria-label="FootHive home">
+          <img src="assets/logo/foothive-logo.svg" alt="FootHive">
+        </a>
+
+        <nav class="primary-nav" aria-label="Main navigation">
+          <a href="#products">Products</a>
+          <a href="#story">Story</a>
+          <a href="#notify">Notify</a>
+          <a class="primary-nav__shop" href="https://pin.it/37MYm0GnG" target="_blank" rel="noopener noreferrer">Shop</a>
+        </nav>
+      </div>
     </header>
 
-    <main>
-      <!-- Hero content is added in a later ticket. -->
-      <!-- Products content is added in a later ticket. -->
-      <!-- Story content is added in a later ticket. -->
-      <!-- Trust content is added in a later ticket. -->
-      <!-- Notify content is added in a later ticket. -->
+    <main id="main-content" class="site-main page-width">
+      <!-- Hero content is added in T03. -->
+      <section id="products" aria-label="Products">
+        <!-- Product content is added in T04. -->
+      </section>
+      <section id="story" aria-label="Our story">
+        <!-- Story content is added in a later ticket. -->
+      </section>
+      <section id="trust" aria-label="Customer information">
+        <!-- Trust content is added in a later ticket. -->
+      </section>
+      <section id="notify" aria-label="Get notified">
+        <!-- Notify content is added in T06 and T07. -->
+      </section>
     </main>
 
-    <footer>
-      <!-- Footer content is added in T02. -->
+    <footer class="site-footer">
+      <div class="site-footer__inner page-width">
+        <div class="site-footer__brand">
+          <a class="brand brand--footer" href="#top" aria-label="FootHive home">
+            <img src="assets/logo/foothive-logo-dark.svg" alt="FootHive">
+          </a>
+          <p class="site-footer__tagline">BUILT TO LAST</p>
+        </div>
+
+        <nav class="footer-group" aria-label="Shop links">
+          <h2>Shop</h2>
+          <a href="https://pin.it/37MYm0GnG" target="_blank" rel="noopener noreferrer">Shop all</a>
+          <a href="#products">Featured footwear</a>
+        </nav>
+
+        <nav class="footer-group" aria-label="Information links">
+          <h2>Info</h2>
+          <a href="#story">Our story</a>
+          <a href="#">Privacy policy · coming soon</a>
+          <a href="#">Returns · coming soon</a>
+        </nav>
+
+        <div class="footer-group">
+          <h2>Stay connected</h2>
+          <a href="mailto:deodinihq@yahoo.com">deodinihq@yahoo.com</a>
+          <a href="https://pin.it/37MYm0GnG" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+
+        <p class="site-footer__copyright">© 2026 FootHive. All rights reserved.</p>
+      </div>
     </footer>
   </body>
 </html>
