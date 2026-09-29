@@ -168,8 +168,22 @@
           </li>
         </ul>
       </section>
-      <section id="notify" aria-label="Get notified">
-        <!-- Notify content is added in T06 and T07. -->
+      <section class="notify-section" id="notify" aria-labelledby="notify-heading">
+        <div class="notify-section__intro">
+          <p class="notify-section__eyebrow">Stay in the loop</p>
+          <h2 id="notify-heading">Get drop alerts.</h2>
+          <p>Be first when new pairs arrive. One email, only when there is something worth stepping into.</p>
+        </div>
+        <form class="notify-form" action="https://docs.google.com/forms/d/e/1FAIpQLSe5QM7xc1tT8DSJD2Ryiirh4_mfuMQGnLUxte0mzVf-Gxh_PA/formResponse" method="post" target="foothive-form-target" novalidate>
+          <label for="notify-email">Email address</label>
+          <div class="notify-form__controls">
+            <input id="notify-email" name="entry.1045781291" type="email" autocomplete="email" placeholder="you@example.com" required>
+            <button type="submit">Notify me <span aria-hidden="true">&#8599;</span></button>
+          </div>
+          <p class="notify-form__consent">Get drop alerts - no spam, unsubscribe anytime.</p>
+          <p class="notify-form__status" data-notify-status aria-live="polite" role="status"></p>
+          <iframe class="notify-form__target" name="foothive-form-target" title="Hidden notification form submission" tabindex="-1" aria-hidden="true"></iframe>
+        </form>
       </section>
     </main>
 

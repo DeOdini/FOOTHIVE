@@ -94,3 +94,15 @@ Continue the Foothive static landing page in `C:\Users\USER\FOOTHIVE`. T04 is me
 
 Keep the MVP scope: static site, no prices, cart, backend, database, authentication, or extra pages unless the approved ticket explicitly calls for them. Pinterest remains the temporary Shop/Instagram destination. Do not use images listed in `FAILED_FH_BRAINBOX.md`. The favicon console error is out of scope by Operator decision. Before T06, record final copy approval or any requested copy changes.
 
+## T07 - Get Notified form
+
+**Status:** Implemented on `t07/get-notified-form`; ready for evaluation.
+
+- **Form action:** `https://docs.google.com/forms/d/e/1FAIpQLSe5QM7xc1tT8DSJD2Ryiirh4_mfuMQGnLUxte0mzVf-Gxh_PA/formResponse`
+- **Email field:** `entry.1045781291`
+- **Scope:** Email only; no name, address, CAPTCHA, backend, or mailing-list provider.
+
+The inline FootHive form submits to Google Form/Sheet through a hidden iframe target, so visitors remain on the FootHive page. It includes an accessible email label, required email validation, consent copy, inline error/status messaging, and a success state. The Google Form interface is not displayed on the website, and no submitted email is stored in the repository.
+
+Focused validation confirmed the endpoint, entry ID, invalid-email error state, mobile stacking, desktop inline controls, and no horizontal overflow. The existing favicon 404 remains out of scope by Operator decision. No real email was submitted during testing.
+
