@@ -109,7 +109,7 @@ Focused validation confirmed the endpoint, entry ID, invalid-email error state, 
 ## T09 - SEO, semantics, and accessibility
 
 **Status:** Implemented, committed, and pushed; not merged.  
-**Branch:** `t08/seo-semantics-accessibility`  
+**Branch:** `t09/seo-semantics-accessibility`
 **Commit:** `f9c1033433a70bde5ab79f12a5339535d716fdb6` - `T08: add SEO and accessibility refinements`  
 **Parent:** `aff08edda364866f26b06c97c57c9af7dc6e7567` - T07 Get Notified form
 
