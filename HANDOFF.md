@@ -106,3 +106,34 @@ The inline FootHive form submits to Google Form/Sheet through a hidden iframe ta
 
 Focused validation confirmed the endpoint, entry ID, invalid-email error state, mobile stacking, desktop inline controls, and no horizontal overflow. The existing favicon 404 remains out of scope by Operator decision. No real email was submitted during testing.
 
+## T09 - SEO, semantics, and accessibility
+
+**Status:** Implemented, committed, and pushed; not merged.  
+**Branch:** `t08/seo-semantics-accessibility`  
+**Commit:** `f9c1033433a70bde5ab79f12a5339535d716fdb6` - `T08: add SEO and accessibility refinements`  
+**Parent:** `aff08edda364866f26b06c97c57c9af7dc6e7567` - T07 Get Notified form
+
+### Changes
+
+- Preserved Copilot's Open Graph metadata and reduced-motion CSS.
+- Added canonical URL, Open Graph site name and URL, Twitter summary-card metadata, and theme color.
+- Added intrinsic dimensions to all seven product images and both logos.
+- Added an accessible name to the notification form and disabled autocapitalization and spellcheck for its email field.
+- Retained the existing semantic landmarks, heading hierarchy, alt text, skip link, visible focus states, and live form status.
+- Favicon remains deferred by Operator decision; no GA4 integration or new dependency was added.
+
+### Responsive verification
+
+Tested the local T08 working tree in Chrome (De O'DINI profile) using CUA browser controls, viewport overrides, Playwright-backed read-only page evaluation, and screenshots. The temporary static server at `127.0.0.1:4175` was stopped after testing, and Chrome's viewport was reset.
+
+| Viewport | Product grid | Overflow | Visual review |
+|---|---|---|---|
+| 1440x900 desktop | 3 columns | None | Reviewed |
+| 768x1024 tablet | 2 columns | None | Reviewed |
+| 390x844 mobile | 1 column | None | Reviewed |
+
+All seven product images and both logos loaded after scrolling through the mobile page. No warning/error entries were returned by the current browser console-log API. Copilot's earlier preview log showed the deferred `/favicon.ico` 404. No Safari, Firefox, or Edge test, and no automated accessibility audit, was run.
+
+### Ticket mapping note
+
+Ticket correction: this SEO/semantics/accessibility implementation is T09 work, originally committed on a branch named `t08/seo-semantics-accessibility` due to the recorded ticket-role mismatch. The implementation remains unchanged and is reclassified as T09. The authorized T08 GA4 hook is being implemented separately from the T07 commit.
