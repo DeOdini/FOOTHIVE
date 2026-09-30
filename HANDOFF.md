@@ -63,7 +63,7 @@ To replace a card, place the replacement image in `assets/products/` and update 
 
 ## T05 - Story / brand block
 
-**Status:** Implemented on `t05/story-brand-block`; committed and pushed as `f7e195b`. The branch is ready for merge review.
+**Status:** Implemented and merged to `main` through PR #4. The T05 implementation commit is `f7e195b`; the merge commit is `df42c83`.
 
 - **Repository:** `C:\Users\USER\FOOTHIVE`
 - **Source branch:** `t05/story-brand-block`
@@ -72,25 +72,25 @@ To replace a card, place the replacement image in `assets/products/` and update 
 
 The story section now sits between Products and Trust with the approved Direction B attitude: `Built different. Made to last.` It includes PRD-safe brand-positioning copy, an optional `Shop the collection` link using the temporary Pinterest destination, semantic `h2` structure, and mobile-first responsive styling. No trust content, notify form, analytics, cart, backend, extra pages, or new dependencies were introduced.
 
-Focused local browser validation confirmed the story section at desktop and mobile sizes, no horizontal overflow, correct section labelling, responsive layout, and the approved Shop placeholder. The existing favicon 404 remains the only console error and is out of scope by Operator decision. Final copy approval and the full T05 evaluation remain separate review gates.
+Focused local browser validation confirmed the story section at desktop and mobile sizes, no horizontal overflow, correct section labelling, responsive layout, and the approved Shop placeholder. The Operator was also able to confirm the responsive state of the T05 website. The existing favicon 404 remains the only console error and is out of scope by Operator decision. Final copy approval remains a separate review gate.
 
 ## Current overall report and Copilot handoff � 2026-09-29
 
 ### Overall project state
 
-T01�T05 are implemented. T02, T03, and T04 are merged to GitHub `main`; T05 is implemented on `t05/story-brand-block` at `f7e195b` and is the next branch awaiting merge. T04 was merged through [PR #3](https://github.com/DeOdini/FOOTHIVE/pull/3), merge commit `0224b26dfa8e89b1c1c0c148fc30eede050ea358`.
+T01�T05 are implemented. T02, T03, T04, and T05 are merged to GitHub `main`; T05 was merged through PR #4 at `df42c83`. T04 was merged through [PR #3](https://github.com/DeOdini/FOOTHIVE/pull/3), merge commit `0224b26dfa8e89b1c1c0c148fc30eede050ea358`.
 
 - **T01 � Project shell and design tokens:** Claude's evaluation is recorded as a pass.
 - **T02 � Global layout and responsive shell:** Merged through PR #1. The Operator and Codex report responsive verification at desktop, tablet, mobile, and narrow mobile sizes, with no horizontal overflow reported.
 - **T03 � Hero section:** Merged through PR #2. Structural checks passed; no separate T03 browser/device QA is recorded.
 - **T04 � Product grid:** Seven cards (three boots, two classic shoes, two runners), using selected local images. Prices are omitted and flagged images were excluded.
-- **T05 � Story / brand block:** Implemented on `t05/story-brand-block`; drafted copy and focused local rendering checks are recorded above. Final copy approval and full browser/device evaluation remain pending.
+- **T05 � Story / brand block:** Implemented and merged to `main`; focused rendering checks and the Operator's responsive confirmation are recorded above. Final copy approval remains pending.
 
 The deployed page DOM was observed to contain the T04 hero and all seven product cards. Local merged-branch viewport verification then confirmed the 3/2/1 grid progression, seven loaded images, consistent 4:5 image boxes, no horizontal overflow, usable hero and product links, and visible mobile navigation/footer behavior. The public Netlify URL was blocked by Team Protection during this pass. The only local console error was a missing `/favicon.ico`, so the T04 verdict remains **IMPLEMENTATION PASS - RESPONSIVE VERIFICATION PENDING**.
 
 ### Instructions for Copilot
 
-Continue the Foothive static landing page in `C:\Users\USER\FOOTHIVE`. T04 is merged remotely via PR #3 (`0224b26dfa8e89b1c1c0c148fc30eede050ea358`). T05 is on `t05/story-brand-block` at `f7e195b` and should be reviewed/merged before the next ticket. Preserve any documentation updates before switching branches. Read this handoff and the approved next ticket before implementing anything.
+Continue the Foothive static landing page in `C:\Users\USER\FOOTHIVE`. T04 is merged remotely via PR #3 (`0224b26dfa8e89b1c1c0c148fc30eede050ea358`) and T05 is merged via PR #4 (`df42c83`). Preserve any documentation updates before switching branches. Read this handoff and the approved next ticket before implementing anything.
 
-Keep the MVP scope: static site, no prices, cart, backend, database, authentication, or extra pages unless the approved ticket explicitly calls for them. Pinterest remains the temporary Shop/Instagram destination. Do not use images listed in `FAILED_FH_BRAINBOX.md`. The favicon console error is out of scope by Operator decision. Before T06, complete the T05 evaluation and record final copy approval or any requested copy changes.
+Keep the MVP scope: static site, no prices, cart, backend, database, authentication, or extra pages unless the approved ticket explicitly calls for them. Pinterest remains the temporary Shop/Instagram destination. Do not use images listed in `FAILED_FH_BRAINBOX.md`. The favicon console error is out of scope by Operator decision. Before T06, record final copy approval or any requested copy changes.
 
