@@ -105,10 +105,19 @@ Keep the MVP scope: static site, no prices, cart, backend, database, authenticat
 The inline FootHive form submits to Google Form/Sheet through a hidden iframe target, so visitors remain on the FootHive page. It includes an accessible email label, required email validation, consent copy, inline error/status messaging, and a success state. The Google Form interface is not displayed on the website, and no submitted email is stored in the repository.
 
 Focused validation confirmed the endpoint, entry ID, invalid-email error state, mobile stacking, desktop inline controls, and no horizontal overflow. The existing favicon 404 remains out of scope by Operator decision. No real email was submitted during testing.
+## T08 - GA4 hook
+
+**Status:** Implemented and merged into `main` via PR #7.
+**Base:** T07 commit `aff08ed` (`t07/get-notified-form`)
+**Measurement ID:** `G-8WM4JZKBNR` in `js/analytics.js`
+
+The site loads `js/analytics.js` once from the `<head>` of `index.html`. The script holds the Measurement ID in one configuration variable, skips initialization if the ID is the placeholder `G-XXXXXXXXXX`, and uses a window guard to avoid duplicate initialization. With the supplied ID, it initializes Google’s `gtag.js` and enables the standard `page_view` event. No notify-form email, consent text, or other form values are sent as analytics event parameters; no custom form events are configured.
+
+The Measurement ID is a public identifier, not a secret. This static site does not read `.env` files, so the ID is configured directly in `js/analytics.js`. No new dependencies, backend, SEO changes, or layout changes were added for T08.
 
 ## T09 - SEO, semantics, and accessibility
 
-**Status:** Implemented, committed, and pushed; not merged.  
+**Status:** Implemented, committed, and pushed.  
 **Branch:** `t09/seo-semantics-accessibility`
 **Commit:** `f9c1033433a70bde5ab79f12a5339535d716fdb6` - `T08: add SEO and accessibility refinements`  
 **Parent:** `aff08edda364866f26b06c97c57c9af7dc6e7567` - T07 Get Notified form
@@ -120,11 +129,11 @@ Focused validation confirmed the endpoint, entry ID, invalid-email error state, 
 - Added intrinsic dimensions to all seven product images and both logos.
 - Added an accessible name to the notification form and disabled autocapitalization and spellcheck for its email field.
 - Retained the existing semantic landmarks, heading hierarchy, alt text, skip link, visible focus states, and live form status.
-- Favicon remains deferred by Operator decision; no GA4 integration or new dependency was added.
+- Favicon remains deferred by Operator decision. No GA4 code was added as part of the T09 SEO implementation.
 
 ### Responsive verification
 
-Tested the local T08 working tree in Chrome (De O'DINI profile) using CUA browser controls, viewport overrides, Playwright-backed read-only page evaluation, and screenshots. The temporary static server at `127.0.0.1:4175` was stopped after testing, and Chrome's viewport was reset.
+Tested the local SEO/accessibility working tree in Chrome (De O'DINI profile) using CUA browser controls, viewport overrides, Playwright-backed read-only page evaluation, and screenshots. The temporary static server at `127.0.0.1:4175` was stopped after testing, and Chrome's viewport was reset.
 
 | Viewport | Product grid | Overflow | Visual review |
 |---|---|---|---|
@@ -136,4 +145,4 @@ All seven product images and both logos loaded after scrolling through the mobil
 
 ### Ticket mapping note
 
-Ticket correction: this SEO/semantics/accessibility implementation is T09 work, originally committed on a branch named `t08/seo-semantics-accessibility` due to the recorded ticket-role mismatch. The implementation remains unchanged and is reclassified as T09. The authorized T08 GA4 hook is being implemented separately from the T07 commit.
+Ticket correction: this SEO/semantics/accessibility implementation is T09 work, originally committed on a branch named `t08/seo-semantics-accessibility` due to the recorded ticket-role mismatch. The implementation remains unchanged and is reclassified as T09. The authorized T08 GA4 hook was implemented on `t08/ga4-hook` from T07 and merged into `main` via PR #7.
