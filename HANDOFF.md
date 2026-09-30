@@ -174,3 +174,39 @@ At 320 px, empty-email validation showed the expected inline error in both brows
 - 1440×900: [edge-1440x900.png](docs/qa/t11/edge-1440x900.png)
 
 The same captures and full viewport matrix are recorded in the Brainbox build report under **T11 — Cross-browser and responsive QA**. These repository copies keep the evidence available with the T11 handoff.
+## T12 — Operator maintenance and deploy readiness
+
+This is a static site. `index.html` is the entry point at the repository root; CSS, JavaScript, and product images are loaded from relative paths. There is no package manifest, dependency install, or build command. Keep the site at the publish root when deploying to Netlify.
+
+### Replace a product
+
+1. Add the approved image to `assets/products/` using a descriptive, lowercase filename. Check `FAILED_FH_BRAINBOX.md` before selecting imagery; do not use any flagged image.
+2. In `index.html`, find the matching `<article class="product-card">` in `.product-grid`.
+3. Update the image `src` and descriptive `alt`, product heading, category, and corner tag together. Keep the image links and Shop links pointed at the intended product destination.
+4. To add a product, duplicate one complete product-card article; to remove one, remove the complete article. Keep 6–12 products and a mix of boots, classic shoes, and runners. Prices remain omitted.
+5. Check that each local image path resolves and review the card at mobile and desktop widths.
+
+### Replace trial links with final destinations
+
+Shop and social links currently use the trial Pinterest URL `https://pin.it/37MYm0GnG`. When the Operator supplies final URLs, edit the relevant `href` values in `index.html`:
+
+- Set Shop navigation, hero, product-card, story, and store links to the appropriate Shopify destination. Use product-specific Shopify URLs on individual product cards when available; use the collection/store URL for general Shop links.
+- Replace only the footer Instagram link with the final Instagram profile URL.
+- Search `index.html` for `pin.it/37MYm0GnG` to find every remaining trial destination. Review each occurrence before changing it; do not blindly use one URL for Shopify and Instagram.
+- Until final destinations are supplied, keep the approved Pinterest trial links. Do not invent or scrape a Shopify store URL.
+
+### Notification form endpoint and field
+
+The notification form is in `index.html`. Its current Google Forms action is `https://docs.google.com/forms/d/e/1FAIpQLSe5QM7xc1tT8DSJD2Ryiirh4_mfuMQGnLUxte0mzVf-Gxh_PA/formResponse`, and the email input uses `name="entry.1045781291"`. The Operator confirmed this mapping and two successful live responses. If the Operator replaces the Google Form, update both the form `action` and the email field's `name` using the new form's published prefilled-entry mapping. Keep the email-only collection and existing validation/status behavior. The linked response Sheet is managed by the Operator; no email submissions or private response data belong in this repository.
+
+### GA4 Measurement ID
+
+The single configuration is `measurementId` in `js/analytics.js`, currently `G-8WM4JZKBNR`. If the analytics property changes, replace that value with the new `G-...` Measurement ID. It is a public identifier, not a secret; this static site does not load `.env`. The script skips the placeholder `G-XXXXXXXXXX`, prevents duplicate initialization, and sends the standard page view only. Do not add form values or email addresses to analytics events.
+
+### Preview and deployment
+
+For a local HTTP preview, serve the repository root and open `http://localhost:4173/`; the Operator's existing preview server is already running. The page can also be opened from the root `index.html` for a basic visual check, though use an HTTP preview to confirm external form/analytics behavior and relative asset loading.
+
+Netlify is configured to publish the repository root from GitHub `main` (per the recorded project setup); no build command or publish subdirectory is needed. Do not deploy a feature branch. T12 readiness was checked locally; no Netlify deploy or production refresh was triggered, preserving the Operator's remaining deploy credit. Before a future release, merge the reviewed ticket stack to `main`, then let the existing main-branch deployment publish the root `index.html` and verify the resulting production page.
+
+**T12 readiness result:** `index.html` and the referenced site assets are at the repository root and served successfully by the existing localhost preview. Netlify's current dashboard settings and a new production deployment were not rechecked in this ticket.
