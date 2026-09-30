@@ -158,3 +158,19 @@ The current header logo markup now matches PR #6 (`aff08ed`) exactly: no explici
 ## Operator decision — logo dimensions
 
 Operator reviewed the local and deploy-preview screenshots and approved omitting explicit intrinsic `width`/`height` attributes from the header and footer logos. The deploy-preview screenshot shows substantially more vertical space around the header/footer than the localhost version; the visible logo artwork is not itself larger. Keep `.brand img { height: auto; }` and the PR #6 logo markup. T09 dimensions remain on the product images.
+## T11 — Cross-browser responsive QA
+
+**Branch:** `t11/cross-browser-responsive-qa` (stacked on T10; integrate T09 → T10 → T11).
+**Preview:** `http://localhost:4173/` (local only; no Netlify deploy used).
+**Outcome:** Pass across Chrome 154.0.8037.58 and Microsoft Edge 154.0.4258.37 at 320×780, 390×844, 768×1024, and 1440×900. No horizontal overflow; hero copy and CTAs stay within the viewport; product grid responds as 1/1/2/3 columns; notify controls remain usable. No T11 source changes were required.
+
+At 320 px, empty-email validation showed the expected inline error in both browsers without navigation or submission. No valid address was sent during this QA pass. The Operator’s earlier live verification of two Google Forms responses remains the success-path evidence. Firefox was unavailable and Safari is unavailable on this Windows machine. The existing favicon 404 remains deferred by Operator decision.
+
+### T11 Edge screenshots
+
+- 320×780: [edge-320x780.png](docs/qa/t11/edge-320x780.png)
+- 390×844: [edge-390x844.png](docs/qa/t11/edge-390x844.png)
+- 768×1024: [edge-768x1024.png](docs/qa/t11/edge-768x1024.png)
+- 1440×900: [edge-1440x900.png](docs/qa/t11/edge-1440x900.png)
+
+The same captures and full viewport matrix are recorded in the Brainbox build report under **T11 — Cross-browser and responsive QA**. These repository copies keep the evidence available with the T11 handoff.
