@@ -92,6 +92,10 @@ a:focus-visible {
   text-decoration: none;
 }
 
+.brand img {
+  height: auto;
+}
+
 .primary-nav {
   display: flex;
   width: 100%;

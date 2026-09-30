@@ -94,20 +94,24 @@ Continue the Foothive static landing page in `C:\Users\USER\FOOTHIVE`. T04 is me
 
 Keep the MVP scope: static site, no prices, cart, backend, database, authentication, or extra pages unless the approved ticket explicitly calls for them. Pinterest remains the temporary Shop/Instagram destination. Do not use images listed in `FAILED_FH_BRAINBOX.md`. The favicon console error is out of scope by Operator decision. Before T06, record final copy approval or any requested copy changes.
 
+## T06 - Trust section responsive QA
+
+**Status:** Operator confirmed responsive QA across desktop, tablet, and mobile devices.
+
 ## T07 - Get Notified form
 
-**Status:** Implemented on `t07/get-notified-form`; ready for evaluation.
+**Status:** Implemented on `t07/get-notified-form`; Operator confirmed live end-to-end verification with two responses received.
 
 - **Form action:** `https://docs.google.com/forms/d/e/1FAIpQLSe5QM7xc1tT8DSJD2Ryiirh4_mfuMQGnLUxte0mzVf-Gxh_PA/formResponse`
-- **Email field:** `entry.1045781291`
+- **Email address question mapping:** HTML field key `entry.1045781291` (confirmed correct by Operator).
 - **Scope:** Email only; no name, address, CAPTCHA, backend, or mailing-list provider.
 
 The inline FootHive form submits to Google Form/Sheet through a hidden iframe target, so visitors remain on the FootHive page. It includes an accessible email label, required email validation, consent copy, inline error/status messaging, and a success state. The Google Form interface is not displayed on the website, and no submitted email is stored in the repository.
 
-Focused validation confirmed the endpoint, entry ID, invalid-email error state, mobile stacking, desktop inline controls, and no horizontal overflow. The existing favicon 404 remains out of scope by Operator decision. No real email was submitted during testing.
+Focused validation confirmed the endpoint, entry ID, invalid-email error state, mobile stacking, desktop inline controls, and no horizontal overflow. During that focused Codex validation, no real email was submitted. The Operator later confirmed that two live submissions appeared in Google Forms responses. The existing favicon 404 remains out of scope by Operator decision.
 ## T08 - GA4 hook
 
-**Status:** Implemented and merged into `main` via PR #7.
+**Status:** Implemented and merged into `main` via PR #7; Operator confirmed live end-to-end verification.
 **Base:** T07 commit `aff08ed` (`t07/get-notified-form`)
 **Measurement ID:** `G-8WM4JZKBNR` in `js/analytics.js`
 
@@ -146,3 +150,11 @@ All seven product images and both logos loaded after scrolling through the mobil
 ### Ticket mapping note
 
 Ticket correction: this SEO/semantics/accessibility implementation is T09 work, originally committed on a branch named `t08/seo-semantics-accessibility` due to the recorded ticket-role mismatch. The implementation remains unchanged and is reclassified as T09. The authorized T08 GA4 hook was implemented on `t08/ga4-hook` from T07 and merged into `main` via PR #7.
+
+## Header follow-up — PR #6 comparison
+
+The current header logo markup now matches PR #6 (`aff08ed`) exactly: no explicit `width` or `height` attributes. The scoped `.brand img { height: auto; }` rule keeps the logo at its natural aspect ratio and is also applied to the footer logo. Localhost browser verification at a 1225 px viewport measured the header at 95.3 px and the logo at 192 × 60 px. No Netlify deployment was used.
+
+## Operator decision — logo dimensions
+
+Operator reviewed the local and deploy-preview screenshots and approved omitting explicit intrinsic `width`/`height` attributes from the header and footer logos. The deploy-preview screenshot shows substantially more vertical space around the header/footer than the localhost version; the visible logo artwork is not itself larger. Keep `.brand img { height: auto; }` and the PR #6 logo markup. T09 dimensions remain on the product images.
