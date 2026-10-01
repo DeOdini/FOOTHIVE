@@ -246,3 +246,19 @@ Pinterest-bound links now identify Pinterest in their visible labels and accessi
 **Local checks:** The existing preview at `http://localhost:4173/` returned HTTP 200 for the page and stylesheet. Static checks found 20 new-tab external links, all using the approved Pinterest URL and `rel="noopener noreferrer"`; all seven product-image links have product-specific Pinterest accessible names; no Instagram label or misleading store claim remains. No external link was opened and no Netlify deployment was used. The Chrome browser-control connector was unavailable during this pass, so no new visual browser review is claimed.
 
 **Scope:** No real Instagram or Shopify account was invented; no destination URL, product, price, or backend was added.
+## T16 - Accessibility, semantic, and interaction remediation
+
+**Branch:** t16/accessibility-interaction-remediation  
+**Base:** completed T15 tip 20c1ae6.
+
+### Changes
+
+- Added a shared visually hidden description, “Opens in a new tab,” and referenced it from all 20 outbound links so keyboard and screen-reader users are informed about the context change.
+- Changed the skip link's visible keyboard state from :focus to :focus-visible.
+- Kept the existing native modal dialogs, semantic headings/landmarks, form label and live status, visible focus styling, reduced-motion rules, and the documented 7rem section scroll margin.
+
+### Verification
+
+git diff --check passed. Automated source checks found 0 duplicate IDs, 0 broken internal anchors, 20/20 outbound links with Pinterest names, safe rel values and new-tab descriptions, one labeled email input, valid accessible dialog titles, alt text on all 9 images, dimensions on all 7 product images, and the skip-link/reduced-motion rules. The existing local preview returned HTTP 200 for the root page and stylesheet.
+
+Prior T13 manual browser QA recorded focus restoration after closing the privacy dialog and Escape-to-close for the store dialog. A fresh browser/keyboard pass could not be run because the Chrome CUA connector failed to load its request-header policy; no current screen-reader test or formal WCAG conformance claim is made.

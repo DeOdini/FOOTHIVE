@@ -52,6 +52,17 @@ a:focus-visible {
   margin-inline: auto;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 .skip-link {
   position: absolute;
   z-index: 10;
@@ -64,7 +75,7 @@ a:focus-visible {
   text-decoration: none;
 }
 
-.skip-link:focus {
+.skip-link:focus-visible {
   transform: translateY(0);
 }
 
@@ -222,7 +233,7 @@ a:focus-visible {
   }
 }
 
-/* T03 — Hero section */
+/* T03 - Hero section */
 .hero {
   position: relative;
   display: grid;
@@ -1066,7 +1077,7 @@ a:focus-visible {
   }
 }
 
-/* T13 — trial disclosure and policy dialogs */
+/* T13 - trial disclosure and policy dialogs */
 .footer-info-button {
   display: block;
   padding: 0;
