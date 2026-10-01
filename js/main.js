@@ -1,4 +1,4 @@
-﻿const notifyForm = document.querySelector('.notify-form');
+const notifyForm = document.querySelector('.notify-form');
 
 if (notifyForm) {
 	const notifyEmail = notifyForm.querySelector('input[type="email"]');
@@ -36,3 +36,31 @@ if (notifyForm) {
 		setNotifyStatus("You're on the list.", 'success');
 	});
 }
+
+// T13 - lightweight trial information dialogs
+const infoDialogTriggers = document.querySelectorAll('[data-dialog-open]');
+
+infoDialogTriggers.forEach((trigger) => {
+  const dialog = document.getElementById(trigger.dataset.dialogOpen);
+
+  if (!dialog || typeof dialog.showModal !== 'function') {
+    return;
+  }
+
+  trigger.addEventListener('click', (event) => {
+    event.preventDefault();
+    dialog.showModal();
+  });
+});
+
+document.querySelectorAll('[data-dialog-close]').forEach((button) => {
+  button.addEventListener('click', () => button.closest('dialog')?.close());
+});
+
+document.querySelectorAll('dialog.info-dialog').forEach((dialog) => {
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+});

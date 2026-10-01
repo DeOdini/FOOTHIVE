@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="FootHive brings together everyday footwear with a bold, reliable point of view, built to last.">
     <meta name="theme-color" content="#FFFFFF">
+    <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
     <link rel="canonical" href="https://foothive.netlify.app/">
     <meta property="og:site_name" content="FootHive">
     <meta property="og:url" content="https://foothive.netlify.app/">
@@ -47,7 +48,7 @@
             <a class="hero__button hero__button--primary" href="https://pin.it/37MYm0GnG" target="_blank" rel="noopener noreferrer">Shop Now <span aria-hidden="true">&#8599;</span></a>
             <a class="hero__button hero__button--secondary" href="#notify">Get Notified <span aria-hidden="true">&#8595;</span></a>
           </div>
-          <p class="hero__note">Free shipping on orders over $75</p>
+          <p class="hero__note">Illustrative $75 shipping offer · workflow trial only</p>
         </div>
         <div class="hero__visual" aria-hidden="true">
           <div class="hero__orbit hero__orbit--outer"></div>
@@ -163,8 +164,8 @@
         <ul class="trust-grid">
           <li class="trust-card">
             <span class="trust-card__index" aria-hidden="true">01</span>
-            <h3>Free shipping over $75</h3>
-            <p>An approved FootHive offer for qualifying orders.</p>
+            <h3>Example: free shipping over $75</h3>
+            <p>Sample copy for this workflow trial. No orders are placed or fulfilled here.</p>
           </li>
           <li class="trust-card">
             <span class="trust-card__index" aria-hidden="true">02</span>
@@ -191,7 +192,7 @@
             <input id="notify-email" name="entry.1045781291" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com" required>
             <button type="submit">Notify me <span aria-hidden="true">&#8599;</span></button>
           </div>
-          <p class="notify-form__consent">Get drop alerts - no spam, unsubscribe anytime.</p>
+          <p class="notify-form__consent">Workflow trial form only. Do not submit a personal email address.</p>
           <p class="notify-form__status" data-notify-status aria-live="polite" role="status"></p>
           <iframe class="notify-form__target" name="foothive-form-target" title="Hidden notification form submission" tabindex="-1" aria-hidden="true"></iframe>
         </form>
@@ -216,8 +217,8 @@
         <nav class="footer-group" aria-label="Information links">
           <h2>Info</h2>
           <a href="#story">Our story</a>
-          <a href="#">Privacy policy &#183; coming soon</a>
-          <a href="#">Returns &#183; coming soon</a>
+          <button class="footer-info-button" type="button" data-dialog-open="privacy-dialog">Privacy notice</button>
+          <button class="footer-info-button" type="button" data-dialog-open="store-dialog">Shipping &amp; returns &middot; trial info</button>
         </nav>
 
         <div class="footer-group">
@@ -226,8 +227,36 @@
           <a href="https://pin.it/37MYm0GnG" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
 
+        <p class="site-footer__trial-note">A DEODINI workflow trial build &middot; not a live footwear store.</p>
         <p class="site-footer__copyright">&#169; 2026 FootHive. All rights reserved.</p>
       </div>
     </footer>
+
+    <dialog class="info-dialog" id="privacy-dialog" aria-labelledby="privacy-dialog-title" aria-describedby="privacy-dialog-description">
+      <div class="info-dialog__inner">
+        <p class="info-dialog__eyebrow">DEODINI workflow trial</p>
+        <h2 id="privacy-dialog-title">Trial privacy notice</h2>
+        <p id="privacy-dialog-description">FootHive is a portfolio and workflow trial, not an operating footwear store or a live client engagement.</p>
+        <h3>What this page uses</h3>
+        <ul>
+          <li>Google Analytics 4 records a standard page view. The site does not send form field values to Analytics.</li>
+          <li>If you submit the notification form, the email address is sent to a Google Form and its response sheet managed by the Operator for workflow testing.</li>
+        </ul>
+        <p><strong>Please do not submit a personal email address.</strong> This form does not enroll you in a live product-alert subscription. To ask about removal of a test response, email <a href="mailto:deodinihq@yahoo.com?subject=FootHive%20trial%20data%20request">De O'Dini</a>.</p>
+        <button class="info-dialog__close" type="button" data-dialog-close>Close notice</button>
+      </div>
+    </dialog>
+
+    <dialog class="info-dialog" id="store-dialog" aria-labelledby="store-dialog-title" aria-describedby="store-dialog-description">
+      <div class="info-dialog__inner">
+        <p class="info-dialog__eyebrow">Store information</p>
+        <h2 id="store-dialog-title">A footwear workflow trial</h2>
+        <p id="store-dialog-description">This page demonstrates a footwear landing page as part of the DEODINI Brainbox workflow trial. FootHive is not an operating shop, and this page does not accept orders or fulfill products.</p>
+        <h3>Shipping and returns</h3>
+        <p>The &quot;free shipping over $75&quot; line is illustrative sample copy only. No shipping offer, return policy, or commercial terms are active for this trial.</p>
+        <p>Shop links lead to a Pinterest reference destination supplied for the trial; no FootHive Shopify store is connected.</p>
+        <button class="info-dialog__close" type="button" data-dialog-close>Close information</button>
+      </div>
+    </dialog>
   </body>
 </html>
