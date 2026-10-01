@@ -221,3 +221,17 @@ The single-page site now has a visible DEODINI workflow-trial note and native pr
 The existing-logo hexagon mark is available as `assets/logo/favicon.svg` and is linked from the document head. Dialogs use native `<dialog>` behavior, labelled headings, close buttons, backdrop click, and Escape-to-close. No extra page or dependency was added.
 
 **Local verification:** Chrome preview at `http://localhost:4173/` showed both dialogs and their content. The privacy dialog close button restored focus; Escape closed the store dialog. The page had no horizontal overflow at the 1210 px browser viewport. The favicon SVG was opened directly and rendered locally; the root, favicon SVG, stylesheet, and main script returned HTTP 200. No form was submitted, and no email data was transmitted during QA. No Netlify deploy was performed.
+## T14 — Notification form hardening and T07 history correction
+
+**Branch:** `t14/form-hardening-t07-record`, based on the pushed T13 branch.
+**Form implementation commit:** `2788a22` — `T14: clarify Google Forms response state` (pushed to GitHub).
+
+### Form behavior
+
+The confirmed Google Forms field mapping remains `entry.1045781291`; do not change it based on the earlier ambiguous diagnosis. Invalid input continues to show an inline error and focus the email field. A valid request disables the button while the hidden iframe is pending. If no iframe response is observed within 15 seconds, the page shows a timeout/error message, re-enables the button, and retains the entered value. If the Google Forms response page loads, the page reports that the request reached a response page but cannot verify that Google stored it. The address is not cleared and the page no longer claims “You're on the list.” This is the limit of confirmation available to a static page posting cross-origin to Google Forms; no backend was added.
+
+### T07 historical correction
+
+The original historical wording remains preserved in the Brainbox Build Report. The timestamped correction beside it records the Operator's clarification: the field mapping `entry.1045781291` was correct; the earlier root-cause wording was misread; the material issue was that Netlify was private/unpublished; and Google Forms “Collect email addresses” was temporarily enabled during debugging and turned off after the site was made public. The Operator confirmed two responses from the final known-good setup. Do not reinterpret this correction as a field-mapping change.
+
+**Local verification:** Invalid input `not-an-email` showed the inline error, focused the field, and did not navigate/submit. With the Operator's approval, one disposable address (`t14-test@example.com`) was submitted to the configured Google Form; the hidden iframe loaded the Google response page and the new non-confirmatory status appeared. Google Forms persistence was not independently verified in this browser run; the Operator's earlier confirmation of two received responses remains documented. No personal email was used and the test response was not deleted. No Netlify deploy was performed.
