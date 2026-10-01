@@ -292,3 +292,28 @@ T17 establishes this closeout sequence for each ticket:
 A handoff may identify the ticket branch, base, implementation commit, and documentation commit when known. The Build Report is the final after-action record and must distinguish repository state from Netlify deployment state. A pushed feature branch is not thereby merged or deployed. Do not rewrite historical ticket records to make a later state appear earlier.
 
 **T17 implementation:** Documentation-only; this protocol adds no website runtime behavior. Exact commit and push results are recorded in the Brainbox Build Report after the Git operations complete.
+---
+
+## T18 — Release metadata and local verification cleanup
+
+**Branch:** `t18/release-metadata-verification`
+**Base:** T17 pushed tip `f37a91f3a12d06efac0e2fe2c571537d0334e6b9`.
+
+### Release metadata change
+
+- Added an original 1200×630 FootHive social preview graphic at `assets/social/foothive-share-card.png`. It uses the FootHive monogram, name, tagline, and approved orange/black/cream palette; it uses no product photography or third-party imagery.
+- Added absolute `og:image` and `twitter:image` URLs, accessible image descriptions, and Open Graph width/height metadata in `index.html`. Existing title, description, canonical URL, favicon, and page content remain in place.
+- No application dependency, build system, backend, new page, price, store destination, or policy claim was introduced.
+
+### Local verification
+
+- The previously expected preview at `http://localhost:4173/` initially refused the connection because no server was listening. Started a local static preview from the FootHive repository root with Python's built-in HTTP server on port 4173; the server is left running for Operator review.
+- Playwright MCP loaded the local page and verified the title, language, canonical and description metadata; Open Graph/Twitter image URLs and alt text; 1200×630 metadata dimensions; seven product cards; all local images loaded after scrolling through lazy-loaded content; and zero broken in-page anchors.
+- Responsive Playwright checks at 320×780, 390×844, 768×1024, and 1440×900 showed no horizontal overflow and product-grid columns of 1/1/2/3.
+- The share image endpoint returned HTTP 200 and rendered as a complete 1200×630 image. Local HTTP checks returned 200 for the page, stylesheet, scripts, favicon, share image, both logos, and all seven product images.
+- The Google tag request failed DNS resolution on an initial page load, then a later Playwright network check returned HTTP 200 for `gtag.js`. No form was submitted and no GA4 event receipt/processing was claimed. Production GA4 collection remains for the later live release verification.
+- No Netlify deployment or production URL check was performed, preserving the Operator's limited deployment credit.
+
+### Release state
+
+This is a locally reviewed release candidate on the stacked T18 branch. Per the last recorded production check, Netlify still serves the older T09 state; that production state was not rechecked in T18. T18 does not claim merge, deployment, or final publication readiness. T19 integrated QA remains the next release gate, and the final Shopify/Instagram destinations and commercial-policy decisions listed in the audit remain Operator inputs. Exact T18 commit/push state is recorded in the Brainbox Build Report after GitHub verification.
