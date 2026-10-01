@@ -94,20 +94,24 @@ Continue the Foothive static landing page in `C:\Users\USER\FOOTHIVE`. T04 is me
 
 Keep the MVP scope: static site, no prices, cart, backend, database, authentication, or extra pages unless the approved ticket explicitly calls for them. Pinterest remains the temporary Shop/Instagram destination. Do not use images listed in `FAILED_FH_BRAINBOX.md`. The favicon console error is out of scope by Operator decision. Before T06, record final copy approval or any requested copy changes.
 
+## T06 - Trust section responsive QA
+
+**Status:** Operator confirmed responsive QA across desktop, tablet, and mobile devices.
+
 ## T07 - Get Notified form
 
-**Status:** Implemented on `t07/get-notified-form`; ready for evaluation.
+**Status:** Implemented on `t07/get-notified-form`; Operator confirmed live end-to-end verification with two responses received.
 
 - **Form action:** `https://docs.google.com/forms/d/e/1FAIpQLSe5QM7xc1tT8DSJD2Ryiirh4_mfuMQGnLUxte0mzVf-Gxh_PA/formResponse`
-- **Email field:** `entry.1045781291`
+- **Email address question mapping:** HTML field key `entry.1045781291` (confirmed correct by Operator).
 - **Scope:** Email only; no name, address, CAPTCHA, backend, or mailing-list provider.
 
 The inline FootHive form submits to Google Form/Sheet through a hidden iframe target, so visitors remain on the FootHive page. It includes an accessible email label, required email validation, consent copy, inline error/status messaging, and a success state. The Google Form interface is not displayed on the website, and no submitted email is stored in the repository.
 
-Focused validation confirmed the endpoint, entry ID, invalid-email error state, mobile stacking, desktop inline controls, and no horizontal overflow. The existing favicon 404 remains out of scope by Operator decision. No real email was submitted during testing.
+Focused validation confirmed the endpoint, entry ID, invalid-email error state, mobile stacking, desktop inline controls, and no horizontal overflow. During that focused Codex validation, no real email was submitted. The Operator later confirmed that two live submissions appeared in Google Forms responses. The existing favicon 404 remains out of scope by Operator decision.
 ## T08 - GA4 hook
 
-**Status:** Implemented and merged into `main` via PR #7.
+**Status:** Implemented and merged into `main` via PR #7; Operator confirmed live end-to-end verification.
 **Base:** T07 commit `aff08ed` (`t07/get-notified-form`)
 **Measurement ID:** `G-8WM4JZKBNR` in `js/analytics.js`
 
@@ -146,3 +150,203 @@ All seven product images and both logos loaded after scrolling through the mobil
 ### Ticket mapping note
 
 Ticket correction: this SEO/semantics/accessibility implementation is T09 work, originally committed on a branch named `t08/seo-semantics-accessibility` due to the recorded ticket-role mismatch. The implementation remains unchanged and is reclassified as T09. The authorized T08 GA4 hook was implemented on `t08/ga4-hook` from T07 and merged into `main` via PR #7.
+
+## Header follow-up — PR #6 comparison
+
+The current header logo markup now matches PR #6 (`aff08ed`) exactly: no explicit `width` or `height` attributes. The scoped `.brand img { height: auto; }` rule keeps the logo at its natural aspect ratio and is also applied to the footer logo. Localhost browser verification at a 1225 px viewport measured the header at 95.3 px and the logo at 192 × 60 px. No Netlify deployment was used.
+
+## Operator decision — logo dimensions
+
+Operator reviewed the local and deploy-preview screenshots and approved omitting explicit intrinsic `width`/`height` attributes from the header and footer logos. The deploy-preview screenshot shows substantially more vertical space around the header/footer than the localhost version; the visible logo artwork is not itself larger. Keep `.brand img { height: auto; }` and the PR #6 logo markup. T09 dimensions remain on the product images.
+## T11 — Cross-browser responsive QA
+
+**Branch:** `t11/cross-browser-responsive-qa` (stacked on T10; integrate T09 → T10 → T11).
+**Preview:** `http://localhost:4173/` (local only; no Netlify deploy used).
+**Outcome:** Pass across Chrome 154.0.8037.58 and Microsoft Edge 154.0.4258.37 at 320×780, 390×844, 768×1024, and 1440×900. No horizontal overflow; hero copy and CTAs stay within the viewport; product grid responds as 1/1/2/3 columns; notify controls remain usable. No T11 source changes were required.
+
+At 320 px, empty-email validation showed the expected inline error in both browsers without navigation or submission. No valid address was sent during this QA pass. The Operator’s earlier live verification of two Google Forms responses remains the success-path evidence. Firefox was unavailable and Safari is unavailable on this Windows machine. The existing favicon 404 remains deferred by Operator decision.
+
+### T11 Edge screenshots
+
+- 320×780: [edge-320x780.png](docs/qa/t11/edge-320x780.png)
+- 390×844: [edge-390x844.png](docs/qa/t11/edge-390x844.png)
+- 768×1024: [edge-768x1024.png](docs/qa/t11/edge-768x1024.png)
+- 1440×900: [edge-1440x900.png](docs/qa/t11/edge-1440x900.png)
+
+The same captures and full viewport matrix are recorded in the Brainbox build report under **T11 — Cross-browser and responsive QA**. These repository copies keep the evidence available with the T11 handoff.
+## T12 — Operator maintenance and deploy readiness
+
+This is a static site. `index.html` is the entry point at the repository root; CSS, JavaScript, and product images are loaded from relative paths. There is no package manifest, dependency install, or build command. Keep the site at the publish root when deploying to Netlify.
+
+### Replace a product
+
+1. Add the approved image to `assets/products/` using a descriptive, lowercase filename. Check `FAILED_FH_BRAINBOX.md` before selecting imagery; do not use any flagged image.
+2. In `index.html`, find the matching `<article class="product-card">` in `.product-grid`.
+3. Update the image `src` and descriptive `alt`, product heading, category, and corner tag together. Keep the image links and Shop links pointed at the intended product destination.
+4. To add a product, duplicate one complete product-card article; to remove one, remove the complete article. Keep 6–12 products and a mix of boots, classic shoes, and runners. Prices remain omitted.
+5. Check that each local image path resolves and review the card at mobile and desktop widths.
+
+### Replace trial links with final destinations
+
+Shop and social links currently use the trial Pinterest URL `https://pin.it/37MYm0GnG`. When the Operator supplies final URLs, edit the relevant `href` values in `index.html`:
+
+- Set Shop navigation, hero, product-card, story, and store links to the appropriate Shopify destination. Use product-specific Shopify URLs on individual product cards when available; use the collection/store URL for general Shop links.
+- Replace only the footer Instagram link with the final Instagram profile URL.
+- Search `index.html` for `pin.it/37MYm0GnG` to find every remaining trial destination. Review each occurrence before changing it; do not blindly use one URL for Shopify and Instagram.
+- Until final destinations are supplied, keep the approved Pinterest trial links. Do not invent or scrape a Shopify store URL.
+
+### Notification form endpoint and field
+
+The notification form is in `index.html`. Its current Google Forms action is `https://docs.google.com/forms/d/e/1FAIpQLSe5QM7xc1tT8DSJD2Ryiirh4_mfuMQGnLUxte0mzVf-Gxh_PA/formResponse`, and the email input uses `name="entry.1045781291"`. The Operator confirmed this mapping and two successful live responses. If the Operator replaces the Google Form, update both the form `action` and the email field's `name` using the new form's published prefilled-entry mapping. Keep the email-only collection and existing validation/status behavior. The linked response Sheet is managed by the Operator; no email submissions or private response data belong in this repository.
+
+### GA4 Measurement ID
+
+The single configuration is `measurementId` in `js/analytics.js`, currently `G-8WM4JZKBNR`. If the analytics property changes, replace that value with the new `G-...` Measurement ID. It is a public identifier, not a secret; this static site does not load `.env`. The script skips the placeholder `G-XXXXXXXXXX`, prevents duplicate initialization, and sends the standard page view only. Do not add form values or email addresses to analytics events.
+
+### Preview and deployment
+
+For a local HTTP preview, serve the repository root and open `http://localhost:4173/`; the Operator's existing preview server is already running. The page can also be opened from the root `index.html` for a basic visual check, though use an HTTP preview to confirm external form/analytics behavior and relative asset loading.
+
+Netlify is configured to publish the repository root from GitHub `main` (per the recorded project setup); no build command or publish subdirectory is needed. Do not deploy a feature branch. T12 readiness was checked locally; no Netlify deploy or production refresh was triggered, preserving the Operator's remaining deploy credit. Before a future release, merge the reviewed ticket stack to `main`, then let the existing main-branch deployment publish the root `index.html` and verify the resulting production page.
+
+**T12 readiness result:** `index.html` and the referenced site assets are at the repository root and served successfully by the existing localhost preview. Netlify's current dashboard settings and a new production deployment were not rechecked in this ticket.
+
+## T13 — Trial disclosure, policy placeholders, and favicon
+
+**Branch:** `t13/trial-disclosure-policy-placeholders` (based on T12 `6c70342`).
+**Implementation commit:** `db51afd` — `T13: add trial disclosure, policy dialogs, and favicon` (pushed to GitHub).
+
+The single-page site now has a visible DEODINI workflow-trial note and native privacy and store-information dialogs. The privacy notice explains the page-view-only GA4 use and that any form address is sent to the Operator-managed Google Form for workflow testing; it tells visitors not to submit personal email and gives a contact link for a data-removal request. The form copy no longer promises a live subscription or unsubscribe flow. The shipping claim is now expressly illustrative, and the returns/shipping dialog says there is no operating store, active offer, order fulfillment, or commercial policy. The Pinterest reference destination is disclosed without fabricating a Shopify store.
+
+The existing-logo hexagon mark is available as `assets/logo/favicon.svg` and is linked from the document head. Dialogs use native `<dialog>` behavior, labelled headings, close buttons, backdrop click, and Escape-to-close. No extra page or dependency was added.
+
+**Local verification:** Chrome preview at `http://localhost:4173/` showed both dialogs and their content. The privacy dialog close button restored focus; Escape closed the store dialog. The page had no horizontal overflow at the 1210 px browser viewport. The favicon SVG was opened directly and rendered locally; the root, favicon SVG, stylesheet, and main script returned HTTP 200. No form was submitted, and no email data was transmitted during QA. No Netlify deploy was performed.
+## T14 — Notification form hardening and T07 history correction
+
+**Branch:** `t14/form-hardening-t07-record`, based on the pushed T13 branch.
+**Form implementation commit:** `2788a22` — `T14: clarify Google Forms response state` (pushed to GitHub).
+
+### Form behavior
+
+The confirmed Google Forms field mapping remains `entry.1045781291`; do not change it based on the earlier ambiguous diagnosis. Invalid input continues to show an inline error and focus the email field. A valid request disables the button while the hidden iframe is pending. If no iframe response is observed within 15 seconds, the page shows a timeout/error message, re-enables the button, and retains the entered value. If the Google Forms response page loads, the page reports that the request reached a response page but cannot verify that Google stored it. The address is not cleared and the page no longer claims “You're on the list.” This is the limit of confirmation available to a static page posting cross-origin to Google Forms; no backend was added.
+
+### T07 historical correction
+
+The original historical wording remains preserved in the Brainbox Build Report. The timestamped correction beside it records the Operator's clarification: the field mapping `entry.1045781291` was correct; the earlier root-cause wording was misread; the material issue was that Netlify was private/unpublished; and Google Forms “Collect email addresses” was temporarily enabled during debugging and turned off after the site was made public. The Operator confirmed two responses from the final known-good setup. Do not reinterpret this correction as a field-mapping change.
+
+**Local verification:** Invalid input `not-an-email` showed the inline error, focused the field, and did not navigate/submit. With the Operator's approval, one disposable address (`t14-test@example.com`) was submitted to the configured Google Form. The hidden iframe loaded the Google response page, while the site displayed its intentionally non-confirmatory status because a static page cannot inspect Google's cross-origin storage result. On 1 October 2026, the Operator inspected the Google Forms Responses tab and confirmed four responses, including `t14-test@example.com`; this confirms that the test response was received and recorded. The Operator later supplied Screenshot (15).png at C:\Users\USER\OneDrive\Pictures\Screenshots\Screenshot (15).png; it shows four responses including the test address. The image also displays other respondents' email addresses, so it is not copied into the repository; those addresses remain omitted from this handoff. No personal email was used and the test response was not deleted. No Netlify deploy was performed.
+
+## T15 - Trial-safe external destinations and social/commerce semantics
+
+**Branch:** `t15/external-links-trial-semantics` (based on the completed T14 branch).
+**Implementation commit:** d03dbaa - T15: clarify trial external destinations (pushed to GitHub).
+
+Pinterest-bound links now identify Pinterest in their visible labels and accessible names. The previous footer link labeled Instagram is now labeled Pinterest footwear references. Product links identify each shoe as a Pinterest reference, while the hero, story, trust, navigation, and footer links state that they open Pinterest. The trust content now describes Pinterest as this workflow trial's footwear reference and states that FootHive has no live store. The T13 store-information dialog continues to explain that Pinterest is a reference destination and no FootHive Shopify store is connected.
+
+**Local checks:** The existing preview at `http://localhost:4173/` returned HTTP 200 for the page and stylesheet. Static checks found 20 new-tab external links, all using the approved Pinterest URL and `rel="noopener noreferrer"`; all seven product-image links have product-specific Pinterest accessible names; no Instagram label or misleading store claim remains. No external link was opened and no Netlify deployment was used. A follow-up Playwright CLI browser pass during T16 verified the local T15 page at 320x780, 390x844, 768x1024, and 1440x900: the grid rendered 1/1/2/3 columns with no horizontal overflow, and all 20 outbound links retained Pinterest labels and new-tab descriptions.
+
+**Scope:** No real Instagram or Shopify account was invented; no destination URL, product, price, or backend was added.
+## T16 - Accessibility, semantic, and interaction remediation
+
+**Branch:** t16/accessibility-interaction-remediation
+**Base:** completed T15 tip `20c1ae6`.
+**Implementation commit:** `1cab936`; handoff formatting correction commit: `e24ac0c` (both pushed).
+
+### Changes
+
+- Added a shared visually hidden description, “Opens in a new tab,” and referenced it from all 20 outbound links so keyboard and screen-reader users are informed about the context change.
+- Changed the skip link's visible keyboard state from `:focus` to `:focus-visible`.
+- Kept the existing native modal dialogs, semantic headings/landmarks, form label and live status, visible focus styling, reduced-motion rules, and the documented 7rem section scroll margin.
+
+### Verification
+
+`git diff --check` passed. Automated source checks found 0 duplicate IDs, 0 broken internal anchors, 20/20 outbound links with Pinterest names, safe `rel` values and new-tab descriptions, one labeled email input, valid accessible dialog titles, alt text on all 9 images, dimensions on all 7 product images, and the skip-link/reduced-motion rules. The existing local preview returned HTTP 200 for the root page and stylesheet.
+
+Playwright CLI (`@playwright/cli` 0.1.22) verified localhost at 320x780, 390x844, 768x1024, and 1440x900: there was no horizontal overflow and the product grid used 1/1/2/3 columns. Keyboard checks confirmed the first Tab focuses and reveals the skip link; Enter opens the privacy dialog; Escape closes it and restores focus to its trigger. The hero Pinterest link exposed the description “Opens in a new tab” and safe `rel` values. Earlier T13 browser QA also verified Escape-to-close for the store dialog. The CUA connector itself remained unavailable. No screen-reader test or formal WCAG conformance claim is made; no external link or Netlify deployment was used.
+
+**Playwright CLI availability:** `@playwright/cli` 0.1.22 is installed globally and was used for the checks above. Launch a fresh Chromium session in PowerShell with `& C:\Users\USER\AppData\Roaming\npm\playwright-cli.cmd open http://localhost:4173/`; the CLI browser session may close after its process exits or idles. At the time this T16 handoff was written, Playwright MCP was not separately registered in the active Codex session.
+
+---
+
+## Current Playwright MCP status — 1 October 2026
+
+After the T16 CLI verification, the Operator added the Playwright server configuration to `C:\Users\USER\.codex\config.toml` and restarted Codex. The refreshed session exposed the `mcp__playwright__browser_*` tools. This confirms MCP tool registration in the current session; the new MCP connection has not yet been used for a page-level browser test. The Brainbox Build Report contains the detailed setup and troubleshooting timeline. This configuration is local to the Operator's Codex environment and is not part of the FootHive website repository.
+
+---
+
+## T17 — Build and handoff record integrity
+
+**Branch:** `t17/build-handoff-integrity`
+**Base:** T16 final pushed tip `cd02d4e` (`t16/accessibility-interaction-remediation`).
+
+T17 establishes this closeout sequence for each ticket:
+
+1. Inspect the exact ticket criteria, current branch/base, working tree, and existing evidence before changes.
+2. Implement only the approved ticket scope, then complete the relevant local verification.
+3. Update this handoff and the Brainbox FootHive Build Report before staging. Use explicit state labels: **planned**, **implemented locally**, **verified locally**, **committed**, **pushed**, **merged**, **deployed**, and **Operator verified**. Record only states supported by completed actions or evidence.
+4. Stage the ticket implementation and its handoff together. Review the staged paths and diff, then commit them as one ticket closure set where practical. Do not stage unrelated files.
+5. Push the branch, then compare local `HEAD` with the remote branch tip and confirm upstream tracking.
+6. Run final repository status after the push. Ticket closure requires the intended branch checked out, the remote tip matching local `HEAD`, and no uncommitted or untracked ticket work.
+7. If the push itself yields a result that must be documented, record it in the externally maintained Build Report after verification, or in a subsequent documentation commit. Never describe a pending operation as complete. If a later handoff edit creates new work, repeat stage/commit/push/clean-state verification before declaring closure.
+
+A handoff may identify the ticket branch, base, implementation commit, and documentation commit when known. The Build Report is the final after-action record and must distinguish repository state from Netlify deployment state. A pushed feature branch is not thereby merged or deployed. Do not rewrite historical ticket records to make a later state appear earlier.
+
+**T17 implementation:** Documentation-only; this protocol adds no website runtime behavior. Exact commit and push results are recorded in the Brainbox Build Report after the Git operations complete.
+---
+
+## T18 — Release metadata and local verification cleanup
+
+**Branch:** `t18/release-metadata-verification`
+**Base:** T17 pushed tip `f37a91f3a12d06efac0e2fe2c571537d0334e6b9`.
+
+### Release metadata change
+
+- Added an original 1200×630 FootHive social preview graphic at `assets/social/foothive-share-card.png`. It uses the FootHive monogram, name, tagline, and approved orange/black/cream palette; it uses no product photography or third-party imagery.
+- Added absolute `og:image` and `twitter:image` URLs, accessible image descriptions, and Open Graph width/height metadata in `index.html`. Existing title, description, canonical URL, favicon, and page content remain in place.
+- No application dependency, build system, backend, new page, price, store destination, or policy claim was introduced.
+
+### Local verification
+
+- The previously expected preview at `http://localhost:4173/` initially refused the connection because no server was listening. Started a local static preview from the FootHive repository root with Python's built-in HTTP server on port 4173; the server is left running for Operator review.
+- Playwright MCP loaded the local page and verified the title, language, canonical and description metadata; Open Graph/Twitter image URLs and alt text; 1200×630 metadata dimensions; seven product cards; all local images loaded after scrolling through lazy-loaded content; and zero broken in-page anchors.
+- Responsive Playwright checks at 320×780, 390×844, 768×1024, and 1440×900 showed no horizontal overflow and product-grid columns of 1/1/2/3.
+- The share image endpoint returned HTTP 200 and rendered as a complete 1200×630 image. Local HTTP checks returned 200 for the page, stylesheet, scripts, favicon, share image, both logos, and all seven product images.
+- The Google tag request failed DNS resolution on an initial page load, then a later Playwright network check returned HTTP 200 for `gtag.js`. No form was submitted and no GA4 event receipt/processing was claimed. Production GA4 collection remains for the later live release verification.
+- No Netlify deployment or production URL check was performed, preserving the Operator's limited deployment credit.
+
+### Release state
+
+This is a locally reviewed release candidate on the stacked T18 branch. Per the last recorded production check, Netlify still serves the older T09 state; that production state was not rechecked in T18. T18 does not claim merge, deployment, or final publication readiness. T19 integrated QA remains the next release gate, and the final Shopify/Instagram destinations and commercial-policy decisions listed in the audit remain Operator inputs. Exact T18 commit/push state is recorded in the Brainbox Build Report after GitHub verification.
+
+### Operator-supplied GA4 Realtime screenshot assessment — 1 October 2026
+
+The Operator supplied two screenshots of the **FOOTHIVE** GA4 Realtime overview. The visible report shows **3 views** for the FootHive page title and **3 `page_view` events**; the event table also shows `scroll` 2, `session_start` 2, `user_engagement` 2, and `first_visit` 1. The other screenshot shows **4 active users in the last 30 minutes**, **0 in the last 5 minutes**, **3 direct users**, and **4 users in All Users**. This is Operator-supplied evidence that page-view/activity data is appearing in the FootHive property's Realtime overview.
+
+Separately, the Codex Playwright network log showed a POST to `google-analytics.com/g/collect` with the FootHive Measurement ID and `en=page_view`, answered with HTTP 204. The Operator screenshots do not establish that these particular dashboard totals came from that Codex browser visit; no individual-event attribution was established. No email was submitted during T18, and no form data was sent to GA4.
+
+Automated access to detailed GA4 Realtime data and automatic verification of Google Forms responses are noted as possible future workflow work. They were not implemented in T18; the trial remains within its current scope. The Operator's prior manual Google Forms response verification remains the recorded form evidence.
+
+## T19 — Final integrated QA and publication candidate
+
+**Branch:** `t19/final-integrated-qa`, based on T18 `f31256f` (stacked release candidate).
+
+**Result:** Integrated local QA passed with the previously Operator-deferred `/favicon.ico` request retained as a known minor issue. The explicit `assets/logo/favicon.svg` reference is present. This is local verification only; T19 did not deploy or inspect the public production revision.
+
+- Playwright MCP verified the page at 320×780, 390×844, 768×1024, and 1440×900. There was no horizontal overflow; the product grid used 1/1/2/3 columns; seven products rendered; no prices appeared; all product images had alt text and loaded; and internal anchors resolved.
+- Header navigation, product/story/trust sections, trial disclosure, email-only notify form, privacy and store-information dialogs, and footer were present. Escape closed both dialogs and restored focus; the first Tab exposed the skip link; invalid email input displayed its inline error and did not submit to Google Forms. No valid submission was made.
+- Twenty outbound links all target the approved Pinterest reference URL, open in a new tab, and use `noopener noreferrer`; no unexpected external destination was found.
+- SEO/social metadata, the 1200×630 share card, canonical URL, title, and description were checked. Root, CSS, JS, logos, share card, and seven product images returned HTTP 200. `assets/logo/favicon.svg` is linked; Chromium additionally requested `/favicon.ico` and received 404. The Operator previously deferred this minor favicon item, so it is retained as a disclosed exception.
+- Google tag loading initially showed a DNS failure, then a clean reload returned HTTP 200 for `gtag.js`; the `page_view` collection request returned HTTP 204. GA4 receipt is evidenced at the request boundary only; dashboard attribution is not claimed from this browser run. A `form_start` event also returned 204 and contained form structure metadata only; no email value was sent to analytics.
+- The production candidate is static HTML/CSS/JS with no package manifest or build step. `git diff --check` passed; the source tree had no uncommitted changes before documentation.
+- Playwright MCP was the browser tool. No formal WCAG audit, screen-reader test, or cross-browser matrix beyond the current Chromium engine was run.
+
+**Deployment state:** T19 is not merged or deployed. The public production revision was not changed. T20 is the next release stage; production verification must be performed against the deployed public URL and the actual deployed revision.
+
+## T20 - Final production deployment and post-deployment verification
+
+**Branch:** t20/final-production-deployment, based on pushed T19 commit c71291f.
+**Purpose:** Publish the approved accumulated release candidate once, then verify the actual public site against the deployed revision.
+
+Before release, Playwright inspected https://foothive.netlify.app/. It returned the older presentation: Shop navigation, "Free shipping on orders over $75," the prior footer wording, and no visible T13 workflow-trial disclosure. This matched the recorded T09-era public deployment and differed from the local T19 candidate. Git history showed T19 at the current branch tip, with the accumulated release candidate 21 commits ahead of main in the local graph. The first unprivileged fetch was denied access to .git/FETCH_HEAD; local refs were used to establish ancestry and the fetch will be retried with the required Git access.
+
+The T20 branch will carry this release record, be pushed, and merged to main to trigger the configured Netlify main-branch publication. Afterward, verify the public URL, trial disclosure and policy dialogs, updated Pinterest labels, seven product cards, responsive layout, favicon, metadata, GA4 request, console/network state, and actual deployment revision. No valid Google Form submission will be made unless the Operator authorizes it. This section is a plan until those steps are completed; merge and deployment are not yet claimed.
