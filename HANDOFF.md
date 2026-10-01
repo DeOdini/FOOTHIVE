@@ -210,3 +210,14 @@ For a local HTTP preview, serve the repository root and open `http://localhost:4
 Netlify is configured to publish the repository root from GitHub `main` (per the recorded project setup); no build command or publish subdirectory is needed. Do not deploy a feature branch. T12 readiness was checked locally; no Netlify deploy or production refresh was triggered, preserving the Operator's remaining deploy credit. Before a future release, merge the reviewed ticket stack to `main`, then let the existing main-branch deployment publish the root `index.html` and verify the resulting production page.
 
 **T12 readiness result:** `index.html` and the referenced site assets are at the repository root and served successfully by the existing localhost preview. Netlify's current dashboard settings and a new production deployment were not rechecked in this ticket.
+
+## T13 — Trial disclosure, policy placeholders, and favicon
+
+**Branch:** `t13/trial-disclosure-policy-placeholders` (based on T12 `6c70342`).
+**Implementation commit:** `db51afd` — `T13: add trial disclosure, policy dialogs, and favicon` (pushed to GitHub).
+
+The single-page site now has a visible DEODINI workflow-trial note and native privacy and store-information dialogs. The privacy notice explains the page-view-only GA4 use and that any form address is sent to the Operator-managed Google Form for workflow testing; it tells visitors not to submit personal email and gives a contact link for a data-removal request. The form copy no longer promises a live subscription or unsubscribe flow. The shipping claim is now expressly illustrative, and the returns/shipping dialog says there is no operating store, active offer, order fulfillment, or commercial policy. The Pinterest reference destination is disclosed without fabricating a Shopify store.
+
+The existing-logo hexagon mark is available as `assets/logo/favicon.svg` and is linked from the document head. Dialogs use native `<dialog>` behavior, labelled headings, close buttons, backdrop click, and Escape-to-close. No extra page or dependency was added.
+
+**Local verification:** Chrome preview at `http://localhost:4173/` showed both dialogs and their content. The privacy dialog close button restored focus; Escape closed the store dialog. The page had no horizontal overflow at the 1210 px browser viewport. The favicon SVG was opened directly and rendered locally; the root, favicon SVG, stylesheet, and main script returned HTTP 200. No form was submitted, and no email data was transmitted during QA. No Netlify deploy was performed.
