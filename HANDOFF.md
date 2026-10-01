@@ -239,6 +239,7 @@ The original historical wording remains preserved in the Brainbox Build Report. 
 ## T15 - Trial-safe external destinations and social/commerce semantics
 
 **Branch:** `t15/external-links-trial-semantics` (based on the completed T14 branch).
+**Implementation commit:** d03dbaa - T15: clarify trial external destinations (pushed to GitHub).
 
 Pinterest-bound links now identify Pinterest in their visible labels and accessible names. The previous footer link labeled Instagram is now labeled Pinterest footwear references. Product links identify each shoe as a Pinterest reference, while the hero, story, trust, navigation, and footer links state that they open Pinterest. The trust content now describes Pinterest as this workflow trial's footwear reference and states that FootHive has no live store. The T13 store-information dialog continues to explain that Pinterest is a reference destination and no FootHive Shopify store is connected.
 
