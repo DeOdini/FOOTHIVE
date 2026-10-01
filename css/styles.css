@@ -1195,3 +1195,7 @@ a:focus-visible {
     backdrop-filter: none;
   }
 }
+/* T14 - honest form response state */
+.notify-form__status[data-state="notice"] {
+  color: var(--color-ink);
+}
