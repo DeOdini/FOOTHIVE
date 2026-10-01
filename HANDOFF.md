@@ -249,19 +249,46 @@ Pinterest-bound links now identify Pinterest in their visible labels and accessi
 ## T16 - Accessibility, semantic, and interaction remediation
 
 **Branch:** t16/accessibility-interaction-remediation
-**Base:** completed T15 tip 20c1ae6.
-**Implementation commit:** 1cab936; handoff formatting correction commit: e24ac0c (both pushed).
+**Base:** completed T15 tip `20c1ae6`.
+**Implementation commit:** `1cab936`; handoff formatting correction commit: `e24ac0c` (both pushed).
 
 ### Changes
 
 - Added a shared visually hidden description, “Opens in a new tab,” and referenced it from all 20 outbound links so keyboard and screen-reader users are informed about the context change.
-- Changed the skip link's visible keyboard state from :focus to :focus-visible.
+- Changed the skip link's visible keyboard state from `:focus` to `:focus-visible`.
 - Kept the existing native modal dialogs, semantic headings/landmarks, form label and live status, visible focus styling, reduced-motion rules, and the documented 7rem section scroll margin.
 
 ### Verification
 
-git diff --check passed. Automated source checks found 0 duplicate IDs, 0 broken internal anchors, 20/20 outbound links with Pinterest names, safe rel values and new-tab descriptions, one labeled email input, valid accessible dialog titles, alt text on all 9 images, dimensions on all 7 product images, and the skip-link/reduced-motion rules. The existing local preview returned HTTP 200 for the root page and stylesheet.
+`git diff --check` passed. Automated source checks found 0 duplicate IDs, 0 broken internal anchors, 20/20 outbound links with Pinterest names, safe `rel` values and new-tab descriptions, one labeled email input, valid accessible dialog titles, alt text on all 9 images, dimensions on all 7 product images, and the skip-link/reduced-motion rules. The existing local preview returned HTTP 200 for the root page and stylesheet.
 
-Playwright CLI (@playwright/cli 0.1.22) verified localhost at 320x780, 390x844, 768x1024, and 1440x900: there was no horizontal overflow and the product grid used 1/1/2/3 columns. Keyboard checks confirmed the first Tab focuses and reveals the skip link; Enter opens the privacy dialog; Escape closes it and restores focus to its trigger. The hero Pinterest link exposed the description “Opens in a new tab” and safe rel values. Earlier T13 browser QA also verified Escape-to-close for the store dialog. The CUA connector itself remained unavailable. No screen-reader test or formal WCAG conformance claim is made; no external link or Netlify deployment was used.
+Playwright CLI (`@playwright/cli` 0.1.22) verified localhost at 320x780, 390x844, 768x1024, and 1440x900: there was no horizontal overflow and the product grid used 1/1/2/3 columns. Keyboard checks confirmed the first Tab focuses and reveals the skip link; Enter opens the privacy dialog; Escape closes it and restores focus to its trigger. The hero Pinterest link exposed the description “Opens in a new tab” and safe `rel` values. Earlier T13 browser QA also verified Escape-to-close for the store dialog. The CUA connector itself remained unavailable. No screen-reader test or formal WCAG conformance claim is made; no external link or Netlify deployment was used.
 
-**Playwright CLI availability:** @playwright/cli 0.1.22 is installed globally and was used for the checks above. Launch a fresh Chromium session in PowerShell with & C:\Users\USER\AppData\Roaming\npm\playwright-cli.cmd open http://localhost:4173/; the CLI browser session may close after its process exits or idles. Playwright MCP is not separately registered in this Codex session.
+**Playwright CLI availability:** `@playwright/cli` 0.1.22 is installed globally and was used for the checks above. Launch a fresh Chromium session in PowerShell with `& C:\Users\USER\AppData\Roaming\npm\playwright-cli.cmd open http://localhost:4173/`; the CLI browser session may close after its process exits or idles. At the time this T16 handoff was written, Playwright MCP was not separately registered in the active Codex session.
+
+---
+
+## Current Playwright MCP status — 1 October 2026
+
+After the T16 CLI verification, the Operator added the Playwright server configuration to `C:\Users\USER\.codex\config.toml` and restarted Codex. The refreshed session exposed the `mcp__playwright__browser_*` tools. This confirms MCP tool registration in the current session; the new MCP connection has not yet been used for a page-level browser test. The Brainbox Build Report contains the detailed setup and troubleshooting timeline. This configuration is local to the Operator's Codex environment and is not part of the FootHive website repository.
+
+---
+
+## T17 — Build and handoff record integrity
+
+**Branch:** `t17/build-handoff-integrity`
+**Base:** T16 final pushed tip `cd02d4e` (`t16/accessibility-interaction-remediation`).
+
+T17 establishes this closeout sequence for each ticket:
+
+1. Inspect the exact ticket criteria, current branch/base, working tree, and existing evidence before changes.
+2. Implement only the approved ticket scope, then complete the relevant local verification.
+3. Update this handoff and the Brainbox FootHive Build Report before staging. Use explicit state labels: **planned**, **implemented locally**, **verified locally**, **committed**, **pushed**, **merged**, **deployed**, and **Operator verified**. Record only states supported by completed actions or evidence.
+4. Stage the ticket implementation and its handoff together. Review the staged paths and diff, then commit them as one ticket closure set where practical. Do not stage unrelated files.
+5. Push the branch, then compare local `HEAD` with the remote branch tip and confirm upstream tracking.
+6. Run final repository status after the push. Ticket closure requires the intended branch checked out, the remote tip matching local `HEAD`, and no uncommitted or untracked ticket work.
+7. If the push itself yields a result that must be documented, record it in the externally maintained Build Report after verification, or in a subsequent documentation commit. Never describe a pending operation as complete. If a later handoff edit creates new work, repeat stage/commit/push/clean-state verification before declaring closure.
+
+A handoff may identify the ticket branch, base, implementation commit, and documentation commit when known. The Build Report is the final after-action record and must distinguish repository state from Netlify deployment state. A pushed feature branch is not thereby merged or deployed. Do not rewrite historical ticket records to make a later state appear earlier.
+
+**T17 implementation:** Documentation-only; this protocol adds no website runtime behavior. Exact commit and push results are recorded in the Brainbox Build Report after the Git operations complete.
