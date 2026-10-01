@@ -344,9 +344,18 @@ Automated access to detailed GA4 Realtime data and automatic verification of Goo
 
 ## T20 - Final production deployment and post-deployment verification
 
-**Branch:** t20/final-production-deployment, based on pushed T19 commit c71291f.
-**Purpose:** Publish the approved accumulated release candidate once, then verify the actual public site against the deployed revision.
+Branch: t20/final-production-deployment, based on T19 c71291f. Release PR #9 was merged.
+Source commit: c79e861f52fd90a77f468aad2bf657e2eb936a71.
+Main merge / deployed commit: 1916fc59a38bf84125e966e0f2008b4e78749653.
 
-Before release, Playwright inspected https://foothive.netlify.app/. It returned the older presentation: Shop navigation, "Free shipping on orders over $75," the prior footer wording, and no visible T13 workflow-trial disclosure. This matched the recorded T09-era public deployment and differed from the local T19 candidate. Git history showed T19 at the current branch tip, with the accumulated release candidate 21 commits ahead of main in the local graph. The first unprivileged fetch was denied access to .git/FETCH_HEAD; local refs were used to establish ancestry and the fetch will be retried with the required Git access.
+Netlify production deployment completed successfully. The Netlify Deploys API returned state "ready", context "production", branch "main", public=true, deploy_time=5 seconds, and published_at=2026-10-01T18:49:47.720Z. Deployment ID: 6abeab441468890009114676. Its commit_ref is exactly 1916fc59a38bf84125e966e0f2008b4e78749653. Public URL: https://foothive.netlify.app/. No second production deployment was triggered.
 
-The T20 branch will carry this release record, be pushed, and merged to main to trigger the configured Netlify main-branch publication. Afterward, verify the public URL, trial disclosure and policy dialogs, updated Pinterest labels, seven product cards, responsive layout, favicon, metadata, GA4 request, console/network state, and actual deployment revision. No valid Google Form submission will be made unless the Operator authorizes it. This section is a plan until those steps are completed; merge and deployment are not yet claimed.
+### Post-deployment production verification
+
+Playwright MCP inspected the public URL after the release. The page now includes the T13 workflow-trial disclosures, privacy and store-information buttons, Pinterest-labelled destinations, current social metadata, and the seven-product grid. All seven products are present, no prices are present, all nine page images (logos and products) loaded with non-empty alt text, and no in-page anchors are broken. The published title, description, canonical URL, Open Graph share-image URL, and explicit SVG favicon reference match the candidate. All 20 external links point to the approved Pinterest destination, open in a new tab, use rel="noopener noreferrer", and expose the new-tab description.
+
+At 320x780, 390x844, 768x1024, and 1440x900, document scroll width matched its client width; the product grid used 1/1/2/3 columns and all four navigation links remained visible. Privacy and store-information dialogs opened; Escape closed them and restored focus to the triggering control. A fresh production page had no console errors or warnings. The favicon SVG returned HTTP 200; the local preview's separate implicit /favicon.ico 404 did not recur on the public URL.
+
+GA4 gtag.js loaded with HTTP 200 and the production page_view collection request returned HTTP 204 for Measurement ID G-8WM4JZKBNR. The test notification form submission used the Operator-approved disposable address t20-test@example.com. Google Forms formResponse returned HTTP 200 and the hidden response page loaded. As designed for a static cross-origin form, the page stated that it could not verify storage. This browser run alone does not confirm that the row was persisted; Operator confirmation of the response row is pending. No test email value was sent to GA4.
+
+Limitations: No formal WCAG/axe audit, screen-reader test, or non-Chromium browser pass was performed. The final production page was independently checked in Chromium through Playwright MCP. The previous production deployment was the older T09 presentation; the current public response now matches the T20 release source commit above.
