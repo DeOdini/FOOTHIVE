@@ -234,7 +234,7 @@ The confirmed Google Forms field mapping remains `entry.1045781291`; do not chan
 
 The original historical wording remains preserved in the Brainbox Build Report. The timestamped correction beside it records the Operator's clarification: the field mapping `entry.1045781291` was correct; the earlier root-cause wording was misread; the material issue was that Netlify was private/unpublished; and Google Forms “Collect email addresses” was temporarily enabled during debugging and turned off after the site was made public. The Operator confirmed two responses from the final known-good setup. Do not reinterpret this correction as a field-mapping change.
 
-**Local verification:** Invalid input `not-an-email` showed the inline error, focused the field, and did not navigate/submit. With the Operator's approval, one disposable address (`t14-test@example.com`) was submitted to the configured Google Form. The hidden iframe loaded the Google response page, while the site displayed its intentionally non-confirmatory status because a static page cannot inspect Google's cross-origin storage result. On 1 October 2026, the Operator inspected the Google Forms Responses tab and confirmed four responses, including `t14-test@example.com`; this confirms that the test response was received and recorded. The Operator supplied a screenshot inline in the conversation, but no local image file was available to attach to this repository update. Other respondents' email addresses are omitted from this handoff. No personal email was used and the test response was not deleted. No Netlify deploy was performed.
+**Local verification:** Invalid input `not-an-email` showed the inline error, focused the field, and did not navigate/submit. With the Operator's approval, one disposable address (`t14-test@example.com`) was submitted to the configured Google Form. The hidden iframe loaded the Google response page, while the site displayed its intentionally non-confirmatory status because a static page cannot inspect Google's cross-origin storage result. On 1 October 2026, the Operator inspected the Google Forms Responses tab and confirmed four responses, including `t14-test@example.com`; this confirms that the test response was received and recorded. The Operator later supplied Screenshot (15).png at C:\Users\USER\OneDrive\Pictures\Screenshots\Screenshot (15).png; it shows four responses including the test address. The image also displays other respondents' email addresses, so it is not copied into the repository; those addresses remain omitted from this handoff. No personal email was used and the test response was not deleted. No Netlify deploy was performed.
 
 ## T15 - Trial-safe external destinations and social/commerce semantics
 
@@ -250,6 +250,7 @@ Pinterest-bound links now identify Pinterest in their visible labels and accessi
 
 **Branch:** t16/accessibility-interaction-remediation
 **Base:** completed T15 tip 20c1ae6.
+**Implementation commit:** 1cab936; handoff formatting correction commit: e24ac0c (both pushed).
 
 ### Changes
 
