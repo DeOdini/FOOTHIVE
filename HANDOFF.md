@@ -325,3 +325,19 @@ The Operator supplied two screenshots of the **FOOTHIVE** GA4 Realtime overview.
 Separately, the Codex Playwright network log showed a POST to `google-analytics.com/g/collect` with the FootHive Measurement ID and `en=page_view`, answered with HTTP 204. The Operator screenshots do not establish that these particular dashboard totals came from that Codex browser visit; no individual-event attribution was established. No email was submitted during T18, and no form data was sent to GA4.
 
 Automated access to detailed GA4 Realtime data and automatic verification of Google Forms responses are noted as possible future workflow work. They were not implemented in T18; the trial remains within its current scope. The Operator's prior manual Google Forms response verification remains the recorded form evidence.
+
+## T19 — Final integrated QA and publication candidate
+
+**Branch:** `t19/final-integrated-qa`, based on T18 `f31256f` (stacked release candidate).
+
+**Result:** Integrated local QA passed with the previously Operator-deferred `/favicon.ico` request retained as a known minor issue. The explicit `assets/logo/favicon.svg` reference is present. This is local verification only; T19 did not deploy or inspect the public production revision.
+
+- Playwright MCP verified the page at 320×780, 390×844, 768×1024, and 1440×900. There was no horizontal overflow; the product grid used 1/1/2/3 columns; seven products rendered; no prices appeared; all product images had alt text and loaded; and internal anchors resolved.
+- Header navigation, product/story/trust sections, trial disclosure, email-only notify form, privacy and store-information dialogs, and footer were present. Escape closed both dialogs and restored focus; the first Tab exposed the skip link; invalid email input displayed its inline error and did not submit to Google Forms. No valid submission was made.
+- Twenty outbound links all target the approved Pinterest reference URL, open in a new tab, and use `noopener noreferrer`; no unexpected external destination was found.
+- SEO/social metadata, the 1200×630 share card, canonical URL, title, and description were checked. Root, CSS, JS, logos, share card, and seven product images returned HTTP 200. `assets/logo/favicon.svg` is linked; Chromium additionally requested `/favicon.ico` and received 404. The Operator previously deferred this minor favicon item, so it is retained as a disclosed exception.
+- Google tag loading initially showed a DNS failure, then a clean reload returned HTTP 200 for `gtag.js`; the `page_view` collection request returned HTTP 204. GA4 receipt is evidenced at the request boundary only; dashboard attribution is not claimed from this browser run. A `form_start` event also returned 204 and contained form structure metadata only; no email value was sent to analytics.
+- The production candidate is static HTML/CSS/JS with no package manifest or build step. `git diff --check` passed; the source tree had no uncommitted changes before documentation.
+- Playwright MCP was the browser tool. No formal WCAG audit, screen-reader test, or cross-browser matrix beyond the current Chromium engine was run.
+
+**Deployment state:** T19 is not merged or deployed. The public production revision was not changed. T20 is the next release stage; production verification must be performed against the deployed public URL and the actual deployed revision.
