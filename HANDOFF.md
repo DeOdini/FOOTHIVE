@@ -341,3 +341,12 @@ Automated access to detailed GA4 Realtime data and automatic verification of Goo
 - Playwright MCP was the browser tool. No formal WCAG audit, screen-reader test, or cross-browser matrix beyond the current Chromium engine was run.
 
 **Deployment state:** T19 is not merged or deployed. The public production revision was not changed. T20 is the next release stage; production verification must be performed against the deployed public URL and the actual deployed revision.
+
+## T20 - Final production deployment and post-deployment verification
+
+**Branch:** t20/final-production-deployment, based on pushed T19 commit c71291f.
+**Purpose:** Publish the approved accumulated release candidate once, then verify the actual public site against the deployed revision.
+
+Before release, Playwright inspected https://foothive.netlify.app/. It returned the older presentation: Shop navigation, "Free shipping on orders over $75," the prior footer wording, and no visible T13 workflow-trial disclosure. This matched the recorded T09-era public deployment and differed from the local T19 candidate. Git history showed T19 at the current branch tip, with the accumulated release candidate 21 commits ahead of main in the local graph. The first unprivileged fetch was denied access to .git/FETCH_HEAD; local refs were used to establish ancestry and the fetch will be retried with the required Git access.
+
+The T20 branch will carry this release record, be pushed, and merged to main to trigger the configured Netlify main-branch publication. Afterward, verify the public URL, trial disclosure and policy dialogs, updated Pinterest labels, seven product cards, responsive layout, favicon, metadata, GA4 request, console/network state, and actual deployment revision. No valid Google Form submission will be made unless the Operator authorizes it. This section is a plan until those steps are completed; merge and deployment are not yet claimed.
