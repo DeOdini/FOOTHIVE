@@ -317,3 +317,11 @@ A handoff may identify the ticket branch, base, implementation commit, and docum
 ### Release state
 
 This is a locally reviewed release candidate on the stacked T18 branch. Per the last recorded production check, Netlify still serves the older T09 state; that production state was not rechecked in T18. T18 does not claim merge, deployment, or final publication readiness. T19 integrated QA remains the next release gate, and the final Shopify/Instagram destinations and commercial-policy decisions listed in the audit remain Operator inputs. Exact T18 commit/push state is recorded in the Brainbox Build Report after GitHub verification.
+
+### Operator-supplied GA4 Realtime screenshot assessment — 1 October 2026
+
+The Operator supplied two screenshots of the **FOOTHIVE** GA4 Realtime overview. The visible report shows **3 views** for the FootHive page title and **3 `page_view` events**; the event table also shows `scroll` 2, `session_start` 2, `user_engagement` 2, and `first_visit` 1. The other screenshot shows **4 active users in the last 30 minutes**, **0 in the last 5 minutes**, **3 direct users**, and **4 users in All Users**. This is Operator-supplied evidence that page-view/activity data is appearing in the FootHive property's Realtime overview.
+
+Separately, the Codex Playwright network log showed a POST to `google-analytics.com/g/collect` with the FootHive Measurement ID and `en=page_view`, answered with HTTP 204. The Operator screenshots do not establish that these particular dashboard totals came from that Codex browser visit; no individual-event attribution was established. No email was submitted during T18, and no form data was sent to GA4.
+
+Automated access to detailed GA4 Realtime data and automatic verification of Google Forms responses are noted as possible future workflow work. They were not implemented in T18; the trial remains within its current scope. The Operator's prior manual Google Forms response verification remains the recorded form evidence.
