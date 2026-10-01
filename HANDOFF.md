@@ -248,7 +248,7 @@ Pinterest-bound links now identify Pinterest in their visible labels and accessi
 **Scope:** No real Instagram or Shopify account was invented; no destination URL, product, price, or backend was added.
 ## T16 - Accessibility, semantic, and interaction remediation
 
-**Branch:** t16/accessibility-interaction-remediation  
+**Branch:** t16/accessibility-interaction-remediation
 **Base:** completed T15 tip 20c1ae6.
 
 ### Changes
