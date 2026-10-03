@@ -4,7 +4,7 @@
 
 This is the present-state clarification; earlier ticket entries below preserve what was known at their recorded dates. FootHive is implemented through T20 on main and published at https://foothive.netlify.app/. Pinterest remains the approved temporary reference destination; the site has no connected Shopify store or final Instagram profile. T05 copy was later approved by the Operator, closing the earlier review gate. For T07, entry.1045781291 is the correct email field mapping, and the Operator confirmed two live responses. The Operator also confirmed the existing T20 test address t20-test@example.com appears in Google Forms, with screenshot evidence supplied; no repeat submission is authorized or needed. The form's message that the static site cannot inspect Google's cross-origin response sheet remains accurate.
 
-The Operator independently reports clean manual verification in Firefox and Safari. This is not Codex automation, browser certification, WCAG certification, or screen-reader testing. The Operator identified one separate mobile issue: the header Pinterest control appears too large. T23 owns focused viewport verification and the smallest responsive correction, retaining the full label if it fits and preserving an accessible Pinterest name. T22 corrected the privacy wording to acknowledge possible GA4 interaction metadata such as form_start while clarifying that the site does not intentionally send form values to GA4. The corrective sequence is T21 documentation reconciliation, T22 analytics/privacy accuracy, T23 final evidence and Operator-evidence reconciliation, and T24 Brainbox repository synchronization.
+The Operator independently reports clean manual verification in Firefox and Safari. This is not Codex automation, browser certification, WCAG certification, or screen-reader testing. The Operator identified an oversized mobile header Pinterest control. T23 reduced only its phone-width vertical padding, kept the full Pinterest label, and verified the result at mobile, tablet, and desktop viewports; tablet and desktop rules remain unchanged. T22 corrected the privacy wording to acknowledge possible GA4 interaction metadata such as form_start while clarifying that the site does not intentionally send form values to GA4. The corrective sequence is T21 documentation reconciliation, T22 analytics/privacy accuracy, T23 final evidence and Operator-evidence reconciliation, and T24 Brainbox repository synchronization.
 
 - **Project:** FootHive landing page
 - **Stack:** Static HTML, CSS, and JavaScript; no build step.
@@ -372,3 +372,22 @@ This handoff now has a current-state block and explicit later dispositions for T
 ## T22 — Analytics and Privacy Accuracy — 3 October 2026
 
 Updated the live privacy dialog to say that Google Analytics 4 records page views and may record standard or enhanced interaction events, such as form-start metadata. It now states that FootHive does not intentionally send the email address or other notification-form field values to Analytics. This reconciles the observed T19 form_start request with the actual code behavior without claiming that automatic GA4 event collection is disabled. The GA4 configuration and Measurement ID are unchanged; no form values were added to analytics.
+## T23 — Final Verification Evidence & Operator-Evidence Reconciliation — 3 October 2026
+
+### Operator evidence reconciliation
+
+The Operator confirmed that the existing T20 test address t20-test@example.com appears in the Google Forms Responses tab and supplied screenshot evidence. The T20 browser request had returned HTTP 200, while the static site accurately displayed that it could not inspect Google's cross-origin response sheet. These statements describe separate evidence boundaries. Persistence is Operator-confirmed; no replacement test response was submitted. The supplied response screenshot is not copied into the repository because it also exposes other respondents' email addresses.
+
+The Operator also reports clean manual verification in Firefox and Safari. That is Operator-performed manual verification only; this session did not automate those browsers and does not claim formal cross-browser, WCAG, or screen-reader certification.
+
+### Mobile Pinterest header correction
+
+The CSS used 0.55rem vertical padding for the bordered Pinterest nav control at all sizes. T23 overrides only phone layouts below the existing 48rem responsive breakpoint to use 0.4rem vertical padding. The full visible Pinterest label and accessible name remain unchanged. Tablet and desktop styles are unchanged.
+
+### Local Playwright verification
+
+Used Playwright CLI 0.1.22 with Microsoft Edge/Chromium against a temporary Python static server at http://127.0.0.1:4174. At 390x844 the button height measured 33.5 CSS px (padding 6.4px 14.4px), down from 38.3125px in a same-session baseline recreated by restoring the pre-fix 0.55rem padding. The header measured 139.1px and had no horizontal overflow. At 320x780 the full Pinterest label and all four navigation links remained visible, with no horizontal overflow. At 768x1024 and 1440x900 the button remained 38.3125px high with 8.8px vertical padding; both had no horizontal overflow and a 96px header. The privacy dialog visibly showed the corrected GA4 wording and closed with Escape. The browser reported zero console errors and zero warnings. No form was submitted, no Netlify deploy occurred, and the temporary localhost server was stopped after testing.
+
+### Evidence files
+
+Brainbox project evidence: EVIDENCE/T23-mobile-header/mobile-390-before-simulated.png, mobile-390-after.png, mobile-320-after.png, and the Playwright CLI snapshots/console log under EVIDENCE/T23-mobile-header/playwright-cli/. “Before simulated” explicitly means the original 0.55rem padding was restored in the test page for baseline capture; the 38.3125px measurement is from that controlled baseline, not a separate earlier commit screenshot.
