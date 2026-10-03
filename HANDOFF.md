@@ -4,7 +4,7 @@
 
 This is the present-state clarification; earlier ticket entries below preserve what was known at their recorded dates. FootHive is implemented through T20 on main and published at https://foothive.netlify.app/. Pinterest remains the approved temporary reference destination; the site has no connected Shopify store or final Instagram profile. T05 copy was later approved by the Operator, closing the earlier review gate. For T07, entry.1045781291 is the correct email field mapping, and the Operator confirmed two live responses. The Operator also confirmed the existing T20 test address t20-test@example.com appears in Google Forms, with screenshot evidence supplied; no repeat submission is authorized or needed. The form's message that the static site cannot inspect Google's cross-origin response sheet remains accurate.
 
-The Operator independently reports clean manual verification in Firefox and Safari. This is not Codex automation, browser certification, WCAG certification, or screen-reader testing. The Operator identified one separate mobile issue: the header Pinterest control appears too large. T23 owns focused viewport verification and the smallest responsive correction, retaining the full label if it fits and preserving an accessible Pinterest name. T22 corrected the privacy wording to acknowledge possible GA4 interaction metadata such as form_start while clarifying that the site does not intentionally send form values to GA4. The corrective sequence is T21 documentation reconciliation, T22 analytics/privacy accuracy, T23 final evidence and Operator-evidence reconciliation, and T24 Brainbox repository synchronization.
+The Operator independently reports clean manual verification in Firefox and Safari. This is not Codex automation, browser certification, WCAG certification, or screen-reader testing. The Operator identified an oversized mobile header Pinterest control. T23 tightened phone-width navigation spacing and Pinterest button padding so the full label fits on one row at 320px; tablet and desktop rules remain unchanged. T22 corrected the privacy wording to acknowledge possible GA4 interaction metadata such as form_start while clarifying that the site does not intentionally send form values to GA4. The corrective sequence is T21 documentation reconciliation, T22 analytics/privacy accuracy, T23 final evidence and Operator-evidence reconciliation, and T24 Brainbox repository synchronization.
 
 - **Project:** FootHive landing page
 - **Stack:** Static HTML, CSS, and JavaScript; no build step.
@@ -15,7 +15,7 @@ The Operator independently reports clean manual verification in Firefox and Safa
 
 Update copy, product imagery, or external destinations only in the agreed project files. Do not add a cart, backend, database, authentication, or extra pages in v1.
 
-## T02 � Global layout & responsive shell
+## T02 — Global layout & responsive shell
 
 **Status:** Implemented, merged to `main`, deployed, and responsive verification recorded.
 
@@ -23,19 +23,19 @@ Update copy, product imagery, or external destinations only in the agreed projec
 - **Merged PR:** [#1](https://github.com/DeOdini/FOOTHIVE/pull/1)
 - **Source branch:** `t02/global-layout-responsive-shell`
 - **Branch at T02 completion:** `main`
-- **Implementation commit:** `1877def` � `T02: build global responsive shell`
+- **Implementation commit:** `1877def — `T02: build global responsive shell`
 - **Merge commit on main:** `1e6beaf`
 - **Files:** `index.html`, `css/styles.css`
 
-The shell now has a responsive sticky header with the FootHive logo and Products / Story / Notify / Shop navigation; anchor targets for the later page sections; shared page-width layout; visible keyboard focus styles; and a dark responsive footer with the logo, �BUILT TO LAST,� email, placeholder social and policy links, and 2026 copyright.
+The shell now has a responsive sticky header with the FootHive logo and Products / Story / Notify / Shop navigation; anchor targets for the later page sections; shared page-width layout; visible keyboard focus styles; and a dark responsive footer with the logo, “BUILT TO LAST,” email, placeholder social and policy links, and 2026 copyright.
 
 T02 deliberately leaves product and story content empty, omits a cart, and adds no real policy routes or feature integrations. The approved Pinterest URL remains the temporary destination for Shop and Instagram. No product images were added.
 
-## T02 � Responsive verification
+## T02 — Responsive verification
 
 **Operator verification:** The Operator reports checking desktop and mobile devices and confirming that the responsive presentation is in accordance.
 
-**Independent Codex verification:** Inspected the live Netlify site (`https://foothive.netlify.app/`) in the De O'Dini Chrome profile using the CUA browser and its Playwright-backed tab API at 1440�900 (desktop), 768�1024 (tablet), 390�844 (mobile), and 320�780 (narrow mobile). At each size, the document had no horizontal overflow. Both logo images loaded; the header/navigation and footer adapted to the viewport; and Chrome reported no console warnings or errors. Screenshots were reviewed at desktop, mobile, and narrow mobile widths. The empty center area is intentional at T02; hero, products, story, trust, and notification content belong to later tickets.
+**Independent Codex verification:** Inspected the live Netlify site (`https://foothive.netlify.app/`) in the De O'Dini Chrome profile using the CUA browser and its Playwright-backed tab API at 1440×900 (desktop), 768×1024 (tablet), 390×844 (mobile), and 320×780 (narrow mobile). At each size, the document had no horizontal overflow. Both logo images loaded; the header/navigation and footer adapted to the viewport; and Chrome reported no console warnings or errors. Screenshots were reviewed at desktop, mobile, and narrow mobile widths. The empty center area is intentional at T02; hero, products, story, trust, and notification content belong to later tickets.
 
 **Tools used:** Chrome via CUA browser control; the tab's accessibility snapshot, Playwright-backed read-only page evaluation, viewport override, screenshot, and console-log APIs. The standalone VS Code Playwright MCP was available but was not invoked. No automated test suite was run.
 
@@ -80,17 +80,17 @@ The story section now sits between Products and Trust with the approved Directio
 
 Focused local browser validation confirmed the story section at desktop and mobile sizes, no horizontal overflow, correct section labelling, responsive layout, and the approved Shop placeholder. The Operator was also able to confirm the responsive state of the T05 website. The existing favicon 404 remains the only console error and is out of scope by Operator decision. Final copy approval was pending at the time of the original T05 handoff entry. The Operator later approved the copy; that review gate is closed.
 
-## Current overall report and Copilot handoff � 2026-09-29
+## Current overall report and Copilot handoff — 2026-09-29
 
 ### Overall project state
 
-T01�T05 are implemented. T02, T03, T04, and T05 are merged to GitHub `main`; T05 was merged through PR #4 at `df42c83`. T04 was merged through [PR #3](https://github.com/DeOdini/FOOTHIVE/pull/3), merge commit `0224b26dfa8e89b1c1c0c148fc30eede050ea358`.
+T01–T05 are implemented. T02, T03, T04, and T05 are merged to GitHub `main`; T05 was merged through PR #4 at `df42c83`. T04 was merged through [PR #3](https://github.com/DeOdini/FOOTHIVE/pull/3), merge commit `0224b26dfa8e89b1c1c0c148fc30eede050ea358`.
 
-- **T01 � Project shell and design tokens:** Claude's evaluation is recorded as a pass.
-- **T02 � Global layout and responsive shell:** Merged through PR #1. The Operator and Codex report responsive verification at desktop, tablet, mobile, and narrow mobile sizes, with no horizontal overflow reported.
-- **T03 � Hero section:** Merged through PR #2. Structural checks passed; no separate T03 browser/device QA is recorded.
-- **T04 � Product grid:** Seven cards (three boots, two classic shoes, two runners), using selected local images. Prices are omitted and flagged images were excluded.
-- **T05 � Story / brand block:** Implemented and merged to `main`; focused rendering checks and the Operator's responsive confirmation are recorded above. Final copy approval remains pending.
+- **T01 — Project shell and design tokens:** Claude's evaluation is recorded as a pass.
+- **T02 — Global layout and responsive shell:** Merged through PR #1. The Operator and Codex report responsive verification at desktop, tablet, mobile, and narrow mobile sizes, with no horizontal overflow reported.
+- **T03 — Hero section:** Merged through PR #2. Structural checks passed; no separate T03 browser/device QA is recorded.
+- **T04 — Product grid:** Seven cards (three boots, two classic shoes, two runners), using selected local images. Prices are omitted and flagged images were excluded.
+- **T05 — Story / brand block:** Implemented and merged to `main`; focused rendering checks and the Operator's responsive confirmation are recorded above. Final copy approval remains pending.
 
 The deployed page DOM was observed to contain the T04 hero and all seven product cards. Local merged-branch viewport verification then confirmed the 3/2/1 grid progression, seven loaded images, consistent 4:5 image boxes, no horizontal overflow, usable hero and product links, and visible mobile navigation/footer behavior. The public Netlify URL was blocked by Team Protection during this pass. The only local console error was a missing `/favicon.ico`, so the T04 verdict remains **IMPLEMENTATION PASS - RESPONSIVE VERIFICATION PENDING**.
 
@@ -372,3 +372,23 @@ This handoff now has a current-state block and explicit later dispositions for T
 ## T22 — Analytics and Privacy Accuracy — 3 October 2026
 
 Updated the live privacy dialog to say that Google Analytics 4 records page views and may record standard or enhanced interaction events, such as form-start metadata. It now states that FootHive does not intentionally send the email address or other notification-form field values to Analytics. This reconciles the observed T19 form_start request with the actual code behavior without claiming that automatic GA4 event collection is disabled. The GA4 configuration and Measurement ID are unchanged; no form values were added to analytics.
+## T23 — Final Verification Evidence & Operator-Evidence Reconciliation — 3 October 2026
+
+### Operator evidence reconciliation
+
+The Operator confirmed that the existing T20 test address t20-test@example.com appears in the Google Forms Responses tab and supplied screenshot evidence. The T20 browser request had returned HTTP 200, while the static site accurately displayed that it could not inspect Google's cross-origin response sheet. These statements describe separate evidence boundaries. Persistence is Operator-confirmed; no replacement test response was submitted. The supplied response screenshot is not copied into the repository because it also exposes other respondents' email addresses.
+
+The Operator also reports clean manual verification in Firefox and Safari. That is Operator-performed manual verification only; this session did not automate those browsers and does not claim formal cross-browser, WCAG, or screen-reader certification.
+
+### Mobile Pinterest header correction
+
+The CSS used 0.55rem vertical padding for the bordered Pinterest nav control at all sizes. T23 overrides only phone layouts below the existing 48rem responsive breakpoint: nav column gap is 0.5rem and the Pinterest control padding is 0.4rem 0.5rem. The full visible Pinterest label and accessible name remain unchanged. This allows all four links to fit on one row at 320px. Tablet and desktop styles are unchanged.
+
+### Local Playwright verification
+
+Used Playwright CLI 0.1.22 with Microsoft Edge/Chromium against a temporary Python static server at http://127.0.0.1:4174. At 390x844 the button height measured 33.5 CSS px (padding 6.4px 8px), down from 38.3125px in a same-session baseline recreated by restoring the pre-fix 0.55rem 0.9rem padding and 1.5rem nav gap. The header measured 139.1px with no overflow. On the first 320x780 pass the button wrapped; the follow-up tightened only the phone nav gap and side padding. The final 320px view keeps the full Pinterest label and all four links on the same row, reduces header height from a simulated prior-style 172.5px to 133px, and has no horizontal overflow. At 768x1024 and 1440x900 the button remained 38.3125px high with 8.8px vertical padding; both had no horizontal overflow and a 96px header. The privacy dialog visibly showed the corrected GA4 wording and closed with Escape. The browser reported zero console errors and zero warnings. No form was submitted, no Netlify deploy occurred, and the temporary localhost server was stopped after testing.
+
+### Evidence files
+
+Brainbox project evidence: EVIDENCE/T23-mobile-header/mobile-390-before-simulated.png, mobile-390-after.png, mobile-320-before-simulated.png, mobile-320-after.png, tablet-768-after.png, desktop-1440-after.png, and the Playwright CLI snapshots/console log under EVIDENCE/T23-mobile-header/playwright-cli/. “Before simulated” explicitly means the original 0.55rem padding was restored in the test page for baseline capture; the 38.3125px measurement is from that controlled baseline, not a separate earlier commit screenshot.
+**Encoding repair follow-up — 3 October 2026:** Replaced the 16 U+FFFD characters in this handoff with context-appropriate em dashes, an en dash, multiplication signs, and quotation marks. This restores readable punctuation without changing historical facts. The file remains UTF-8.
