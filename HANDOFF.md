@@ -1,11 +1,17 @@
 # FootHive handoff
 
+## Current status and Operator evidence — 3 October 2026
+
+This is the present-state clarification; earlier ticket entries below preserve what was known at their recorded dates. FootHive is implemented through T20 on main and published at https://foothive.netlify.app/. Pinterest remains the approved temporary reference destination; the site has no connected Shopify store or final Instagram profile. T05 copy was later approved by the Operator, closing the earlier review gate. For T07, entry.1045781291 is the correct email field mapping, and the Operator confirmed two live responses. The Operator also confirmed the existing T20 test address t20-test@example.com appears in Google Forms, with screenshot evidence supplied; no repeat submission is authorized or needed. The form's message that the static site cannot inspect Google's cross-origin response sheet remains accurate.
+
+The Operator independently reports clean manual verification in Firefox and Safari. This is not Codex automation, browser certification, WCAG certification, or screen-reader testing. The Operator identified one separate mobile issue: the header Pinterest control appears too large. T23 owns focused viewport verification and the smallest responsive correction, retaining the full label if it fits and preserving an accessible Pinterest name. T22 owns the privacy wording correction for GA4 automatic/enhanced interactions such as form_start; the site does not intentionally send form values to GA4. The corrective sequence is T21 documentation reconciliation, T22 analytics/privacy accuracy, T23 final evidence and Operator-evidence reconciliation, and T24 Brainbox repository synchronization.
+
 - **Project:** FootHive landing page
 - **Stack:** Static HTML, CSS, and JavaScript; no build step.
 - **Hosting:** Netlify production is live at `https://foothive.netlify.app/` and publishes from GitHub `main`.
 - **Logo:** `assets/logo/foothive-logo.svg` (dark variant: `assets/logo/foothive-logo-dark.svg`).
 - **Products:** T04 currently uses seven selected product images in `assets/products/`; see the T04 section for filenames and replacement steps.
-- **Preview destinations:** Shop and Instagram currently use `https://pin.it/37MYm0GnG` until the Operator provides final destinations.
+- **Preview destination:** Outbound commerce/social reference links use the approved Pinterest trial URL https://pin.it/37MYm0GnG; no Shopify store or Instagram profile is connected. Visible link labels identify Pinterest.
 
 Update copy, product imagery, or external destinations only in the agreed project files. Do not add a cart, backend, database, authentication, or extra pages in v1.
 
@@ -72,7 +78,7 @@ To replace a card, place the replacement image in `assets/products/` and update 
 
 The story section now sits between Products and Trust with the approved Direction B attitude: `Built different. Made to last.` It includes PRD-safe brand-positioning copy, an optional `Shop the collection` link using the temporary Pinterest destination, semantic `h2` structure, and mobile-first responsive styling. No trust content, notify form, analytics, cart, backend, extra pages, or new dependencies were introduced.
 
-Focused local browser validation confirmed the story section at desktop and mobile sizes, no horizontal overflow, correct section labelling, responsive layout, and the approved Shop placeholder. The Operator was also able to confirm the responsive state of the T05 website. The existing favicon 404 remains the only console error and is out of scope by Operator decision. Final copy approval remains a separate review gate.
+Focused local browser validation confirmed the story section at desktop and mobile sizes, no horizontal overflow, correct section labelling, responsive layout, and the approved Shop placeholder. The Operator was also able to confirm the responsive state of the T05 website. The existing favicon 404 remains the only console error and is out of scope by Operator decision. Final copy approval was pending at the time of the original T05 handoff entry. The Operator later approved the copy; that review gate is closed.
 
 ## Current overall report and Copilot handoff � 2026-09-29
 
@@ -356,6 +362,10 @@ Playwright MCP inspected the public URL after the release. The page now includes
 
 At 320x780, 390x844, 768x1024, and 1440x900, document scroll width matched its client width; the product grid used 1/1/2/3 columns and all four navigation links remained visible. Privacy and store-information dialogs opened; Escape closed them and restored focus to the triggering control. A fresh production page had no console errors or warnings. The favicon SVG returned HTTP 200; the local preview's separate implicit /favicon.ico 404 did not recur on the public URL.
 
-GA4 gtag.js loaded with HTTP 200 and the production page_view collection request returned HTTP 204 for Measurement ID G-8WM4JZKBNR. The test notification form submission used the Operator-approved disposable address t20-test@example.com. Google Forms formResponse returned HTTP 200 and the hidden response page loaded. As designed for a static cross-origin form, the page stated that it could not verify storage. This browser run alone does not confirm that the row was persisted; Operator confirmation of the response row is pending. No test email value was sent to GA4.
+GA4 gtag.js loaded with HTTP 200 and the production page_view collection request returned HTTP 204 for Measurement ID G-8WM4JZKBNR. The test notification form submission used the Operator-approved disposable address t20-test@example.com. Google Forms formResponse returned HTTP 200 and the hidden response page loaded. As designed for a static cross-origin form, the page stated that it could not verify storage. At the time of this browser run, the row had not yet been checked by the Operator. On 3 October 2026, the Operator confirmed that t20-test@example.com appears in Google Forms and supplied screenshot evidence. This later Operator verification confirms persistence; no additional test response was submitted. No test email value was sent to GA4.
 
 Limitations: No formal WCAG/axe audit, screen-reader test, or non-Chromium browser pass was performed. The final production page was independently checked in Chromium through Playwright MCP. The previous production deployment was the older T09 presentation; the current public response now matches the T20 release source commit above.
+
+## T21 — Brainbox / Handoff Documentation Reconciliation — 3 October 2026
+
+This handoff now has a current-state block and explicit later dispositions for T05 approval, T07 mapping/success evidence, the Pinterest trial destination, T20 response persistence, and the Operator's Firefox/Safari manual checks. Earlier ticket notes remain as dated history. The Operator's mobile Pinterest header finding is assigned to T23; the analytics/privacy copy correction is assigned to T22. Brainbox mandatory guidance and its detailed audit dispositions are recorded in OPERATOR_ADDENDUM_FH_BRAINBOX.md and the Brainbox Build Report. No runtime website code changed in T21.
