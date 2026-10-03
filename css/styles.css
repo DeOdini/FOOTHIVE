@@ -1210,9 +1210,13 @@ a:focus-visible {
 .notify-form__status[data-state="notice"] {
   color: var(--color-ink);
 }
-/* T23 — Slightly reduce the Pinterest control height on phone layouts. */
+/* T23 — Compact phone navigation while preserving the full Pinterest label. */
 @media (max-width: 47.999rem) {
+  .primary-nav {
+    column-gap: var(--space-2);
+  }
+
   .primary-nav .primary-nav__shop {
-    padding-block: 0.4rem;
+    padding: 0.4rem 0.5rem;
   }
 }
