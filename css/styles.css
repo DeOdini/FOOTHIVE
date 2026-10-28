@@ -16,6 +16,29 @@
   --page-gutter: clamp(1rem, 4vw, 2.5rem);
 }
 
+:root,
+:root[data-theme="light"] {
+  --fh-surface-page: #FAF8F4;
+  --fh-surface-card: #FFFFFF;
+  --fh-text-primary: #1A1A1A;
+  --fh-text-secondary: #625C56;
+  --fh-accent: #B3470F;
+  --fh-on-accent: #FFFFFF;
+  --fh-border-control: #80766C;
+  --fh-focus-ring: #B3470F;
+}
+
+:root[data-theme="dark"] {
+  --fh-surface-page: #111311;
+  --fh-surface-card: #1C201B;
+  --fh-text-primary: #F4F3EE;
+  --fh-text-secondary: #B9BEB4;
+  --fh-accent: #B6F53C;
+  --fh-on-accent: #111311;
+  --fh-border-control: #7C8774;
+  --fh-focus-ring: #B6F53C;
+}
+
 *,
 *::before,
 *::after {
