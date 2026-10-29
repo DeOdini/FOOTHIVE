@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="FootHive brings together everyday footwear with a bold, reliable point of view, built to last.">
     <meta name="theme-color" content="#FFFFFF">
+    <script src="js/theme.js"></script>
     <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
     <link rel="canonical" href="https://foothive.netlify.app/">
     <meta property="og:site_name" content="FootHive">
@@ -41,6 +42,19 @@
           <a href="#story">Story</a>
           <a href="#notify">Notify</a>
           <a class="primary-nav__shop" href="https://pin.it/37MYm0GnG" target="_blank" rel="noopener noreferrer" aria-describedby="external-link-note">Pinterest</a>
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="Dark mode" aria-pressed="false">
+            <span data-theme-icon="light" aria-hidden="true">
+              <svg width="100%" height="100%" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+              </svg>
+            </span>
+            <span data-theme-icon="dark" aria-hidden="true" hidden>
+              <svg width="100%" height="100%" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+                <path d="M20.4 14.7A8.4 8.4 0 0 1 9.3 3.6 8.5 8.5 0 1 0 20.4 14.7Z"></path>
+              </svg>
+            </span>
+          </button>
         </nav>
       </div>
     </header>

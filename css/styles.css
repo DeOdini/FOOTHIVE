@@ -18,6 +18,7 @@
 
 :root,
 :root[data-theme="light"] {
+  color-scheme: light;
   --fh-surface-page: #FAF8F4;
   --fh-surface-card: #FFFFFF;
   --fh-text-primary: #1A1A1A;
@@ -26,9 +27,14 @@
   --fh-on-accent: #FFFFFF;
   --fh-border-control: #80766C;
   --fh-focus-ring: #B3470F;
+  --fh-surface-inverse: #1A1A1A;
+  --fh-text-on-inverse: #FFFFFF;
+  --fh-text-secondary-on-inverse: #C8C8C8;
+  --fh-accent-on-inverse: #D2691E;
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --fh-surface-page: #111311;
   --fh-surface-card: #1C201B;
   --fh-text-primary: #F4F3EE;
@@ -37,6 +43,10 @@
   --fh-on-accent: #111311;
   --fh-border-control: #7C8774;
   --fh-focus-ring: #B6F53C;
+  --fh-surface-inverse: #111311;
+  --fh-text-on-inverse: #F4F3EE;
+  --fh-text-secondary-on-inverse: #B9BEB4;
+  --fh-accent-on-inverse: #B6F53C;
 }
 
 *,
@@ -47,8 +57,8 @@
 
 body {
   margin: 0;
-  background: var(--color-surface);
-  color: var(--color-ink);
+  background: var(--fh-surface-page);
+  color: var(--fh-text-primary);
   font-family: var(--font-sans);
   line-height: 1.5;
 }
@@ -106,9 +116,10 @@ a:focus-visible {
   position: sticky;
   z-index: 5;
   top: 0;
-  border-top: 3px solid var(--color-accent);
-  border-bottom: 1px solid var(--color-muted);
-  background: var(--color-surface);
+  border-top: 3px solid var(--fh-accent);
+  border-bottom: 1px solid var(--fh-border-control);
+  background: var(--fh-surface-page);
+  color: var(--fh-text-primary);
 }
 
 .site-header__inner {
@@ -128,6 +139,9 @@ a:focus-visible {
 
 .brand img {
   height: auto;
+}
+:root[data-theme="dark"] .site-header .brand img {
+  content: url("../assets/logo/foothive-logo-dark.svg");
 }
 
 .primary-nav {
@@ -156,16 +170,54 @@ a:focus-visible {
   color: var(--color-accent);
 }
 
+.primary-nav a:hover {
+  color: var(--fh-accent);
+}
+
 .primary-nav .primary-nav__shop {
   margin-left: auto;
   padding: 0.55rem 0.9rem;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
+  border: 1px solid var(--fh-accent);
+  color: var(--fh-accent);
 }
 
 .primary-nav .primary-nav__shop:hover {
-  background: var(--color-accent);
-  color: var(--color-surface);
+  background: var(--fh-accent);
+  color: var(--fh-on-accent);
+}
+
+.site-header a:focus-visible {
+  outline-color: var(--fh-focus-ring);
+}
+
+.primary-nav .theme-toggle {
+  display: inline-grid;
+  width: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--fh-border-control);
+  border-radius: 50%;
+  background: var(--fh-surface-card);
+  color: var(--fh-text-primary);
+  cursor: pointer;
+}
+
+.primary-nav .theme-toggle:hover {
+  border-color: var(--fh-accent);
+  background: var(--fh-accent);
+  color: var(--fh-on-accent);
+}
+
+.primary-nav .theme-toggle:focus-visible {
+  outline: 3px solid var(--fh-focus-ring);
+  outline-offset: 3px;
+}
+
+.primary-nav .theme-toggle [data-theme-icon] {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .site-main {
@@ -177,9 +229,9 @@ a:focus-visible {
 }
 
 .site-footer {
-  border-top: 4px solid var(--color-accent);
-  background: var(--color-ink);
-  color: var(--color-surface);
+  border-top: 4px solid var(--fh-accent-on-inverse);
+  background: var(--fh-surface-inverse);
+  color: var(--fh-text-on-inverse);
 }
 
 .site-footer__inner {
@@ -195,7 +247,7 @@ a:focus-visible {
 
 .site-footer__tagline {
   margin: var(--space-2) 0 0;
-  color: var(--color-accent);
+  color: var(--fh-accent-on-inverse);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -211,7 +263,7 @@ a:focus-visible {
 
 .footer-group h2 {
   margin: 0 0 var(--space-1);
-  color: var(--color-surface);
+  color: var(--fh-text-on-inverse);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -219,16 +271,32 @@ a:focus-visible {
 }
 
 .footer-group a {
-  color: var(--color-surface-alt);
+  color: var(--fh-text-on-inverse);
 }
 
 .site-footer__copyright {
   margin: 0;
   padding-top: var(--space-3);
   border-top: 1px solid var(--color-muted);
-  color: var(--color-surface-alt);
+  color: var(--fh-text-secondary-on-inverse);
   font-size: 0.78rem;
   grid-column: 1 / -1;
+}
+
+.site-footer .footer-group a:hover {
+  color: var(--fh-accent-on-inverse);
+}
+
+.site-footer a:focus-visible {
+  outline-color: var(--fh-focus-ring);
+}
+
+.site-footer .footer-info-button:hover {
+  color: var(--fh-accent-on-inverse);
+}
+
+.site-footer .footer-info-button:focus-visible {
+  outline-color: var(--fh-focus-ring);
 }
 
 @media (min-width: 48rem) {
@@ -267,6 +335,8 @@ a:focus-visible {
   overflow: hidden;
   padding-block: clamp(4rem, 9vw, 7.5rem);
   isolation: isolate;
+  background: var(--fh-surface-page);
+  color: var(--fh-text-primary);
 }
 
 .hero__copy {
@@ -280,7 +350,7 @@ a:focus-visible {
   align-items: center;
   gap: 0.7rem;
   margin: 0 0 1.4rem;
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.17em;
@@ -304,14 +374,14 @@ a:focus-visible {
 }
 
 .hero h1 em {
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-style: normal;
 }
 
 .hero__support {
   max-width: 31rem;
   margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
-  color: #55514d;
+  color: var(--fh-text-secondary);
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   line-height: 1.65;
 }
@@ -331,7 +401,7 @@ a:focus-visible {
   justify-content: center;
   gap: 1.2rem;
   padding: 0.8rem 1.35rem;
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--fh-text-primary);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.09em;
@@ -345,34 +415,36 @@ a:focus-visible {
 }
 
 .hero__button--primary {
-  border-color: var(--color-accent);
-  background: var(--color-accent);
-  color: #fff;
+  border-color: var(--fh-accent);
+  background: var(--fh-accent);
+  color: var(--fh-on-accent);
 }
 
 .hero__button--primary:hover {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
+  background: var(--fh-text-primary);
+  border-color: var(--fh-text-primary);
+  color: var(--fh-surface-page);
 }
 
 .hero__button--secondary {
   background: transparent;
-  color: var(--color-ink);
+  color: var(--fh-text-primary);
 }
 
 .hero__button--secondary:hover {
-  background: var(--color-ink);
-  color: #fff;
+  background: var(--fh-text-primary);
+  color: var(--fh-surface-page);
+  border-color: var(--fh-text-primary);
 }
 
 .hero__button:focus-visible {
-  outline: 3px solid var(--color-ink);
+  outline: 3px solid var(--fh-focus-ring);
   outline-offset: 4px;
 }
 
 .hero__note {
   margin: 1.1rem 0 0;
-  color: #68635e;
+  color: var(--fh-text-secondary);
   font-size: 0.8rem;
   font-weight: 650;
   letter-spacing: 0.025em;
@@ -385,8 +457,8 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--color-ink);
-  color: #fff;
+  background: var(--fh-surface-inverse);
+  color: var(--fh-text-on-inverse);
 }
 
 .hero__visual::before,
@@ -423,7 +495,7 @@ a:focus-visible {
 
 .hero__orbit--inner {
   width: 12rem;
-  border-color: var(--color-accent);
+  border-color: var(--fh-accent-on-inverse);
   transform: scale(1.2) rotate(38deg);
 }
 
@@ -438,7 +510,8 @@ a:focus-visible {
   justify-content: center;
   border: 1px solid rgb(255 255 255 / 45%);
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--fh-accent);
+  color: var(--fh-on-accent);
   box-shadow: 0 1.4rem 4rem rgb(0 0 0 / 26%);
   text-align: center;
   transform: rotate(-9deg);
@@ -455,7 +528,7 @@ a:focus-visible {
   width: 2.8rem;
   height: 1px;
   margin: 0.8rem 0 0.45rem;
-  background: #fff;
+  background: currentColor;
 }
 
 .hero__stamp small {
@@ -468,7 +541,7 @@ a:focus-visible {
 .hero__visual-index {
   position: absolute;
   z-index: 2;
-  color: rgb(255 255 255 / 72%);
+  color: var(--fh-text-secondary-on-inverse);
   font-size: 0.62rem;
   font-weight: 750;
   letter-spacing: 0.16em;
@@ -519,7 +592,8 @@ a:focus-visible {
 .product-section {
   margin-block: clamp(3rem, 7vw, 6rem);
   padding: clamp(1.25rem, 4.5vw, 3.5rem);
-  background: var(--color-surface-alt);
+  background: var(--fh-surface-page);
+  color: var(--fh-text-primary);
 }
 
 .product-section__intro {
@@ -529,7 +603,7 @@ a:focus-visible {
 
 .product-section__eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -547,7 +621,7 @@ a:focus-visible {
 
 .product-section__intro > p:last-child {
   margin: 1rem 0 0;
-  color: #5b5752;
+  color: var(--fh-text-secondary);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -560,7 +634,7 @@ a:focus-visible {
 
 .product-card {
   min-width: 0;
-  background: var(--color-surface);
+  background: var(--fh-surface-card);
 }
 
 .product-card__media {
@@ -604,6 +678,7 @@ a:focus-visible {
 .product-card__tag--teal { background: #426a6c; }
 
 .product-card__details {
+  color: var(--fh-text-primary);
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: end;
@@ -614,7 +689,7 @@ a:focus-visible {
 .product-card__category {
   grid-column: 1 / -1;
   margin: 0;
-  color: var(--color-muted);
+  color: var(--fh-text-secondary);
   font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -634,7 +709,7 @@ a:focus-visible {
   align-items: center;
   gap: 0.45rem;
   padding: 0.4rem 0 0.2rem 0.4rem;
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-size: 0.72rem;
   font-weight: 850;
   letter-spacing: 0.08em;
@@ -645,11 +720,11 @@ a:focus-visible {
 }
 
 .product-card__link:hover {
-  color: var(--color-ink);
+  color: var(--fh-text-primary);
 }
 
 .product-card a:focus-visible {
-  outline: 3px solid var(--color-accent);
+  outline: 3px solid var(--fh-focus-ring);
   outline-offset: 3px;
 }
 
@@ -678,12 +753,12 @@ a:focus-visible {
   gap: var(--space-5);
   margin-block: clamp(3rem, 8vw, 7rem);
   padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 6vw, 5rem);
-  background: var(--color-ink);
-  color: var(--color-surface);
+  background: var(--fh-surface-inverse);
+  color: var(--fh-text-on-inverse);
 }
 
 .story-section__marker {
-  color: var(--color-accent);
+  color: var(--fh-accent-on-inverse);
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -695,7 +770,7 @@ a:focus-visible {
 
 .story-section__eyebrow {
   margin: 0 0 var(--space-3);
-  color: var(--color-accent);
+  color: var(--fh-accent-on-inverse);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -713,14 +788,14 @@ a:focus-visible {
 }
 
 .story-section h2 em {
-  color: var(--color-accent);
+  color: var(--fh-accent-on-inverse);
   font-style: normal;
 }
 
 .story-section__copy {
   max-width: 35rem;
   margin-top: clamp(1.5rem, 4vw, 2.5rem);
-  color: rgb(255 255 255 / 76%);
+  color: var(--fh-text-secondary-on-inverse);
   font-size: clamp(1rem, 1.8vw, 1.15rem);
   line-height: 1.7;
 }
@@ -739,8 +814,8 @@ a:focus-visible {
   gap: 0.6rem;
   margin-top: var(--space-5);
   padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--color-accent);
-  color: var(--color-surface);
+  border-bottom: 1px solid var(--fh-accent-on-inverse);
+  color: var(--fh-text-on-inverse);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -749,11 +824,11 @@ a:focus-visible {
 }
 
 .story-section__link:hover {
-  color: var(--color-accent);
+  color: var(--fh-accent-on-inverse);
 }
 
 .story-section__link:focus-visible {
-  outline-color: var(--color-surface);
+  outline-color: var(--fh-focus-ring);
 }
 
 @media (min-width: 48rem) {
@@ -778,7 +853,9 @@ a:focus-visible {
 .trust-section {
   margin-block: clamp(3rem, 8vw, 7rem);
   padding-block: clamp(2rem, 5vw, 4rem);
-  border-block: 1px solid var(--color-muted);
+  border-block: 1px solid var(--fh-border-control);
+  background: var(--fh-surface-page);
+  color: var(--fh-text-primary);
 }
 
 .trust-section__heading {
@@ -787,7 +864,7 @@ a:focus-visible {
 
 .trust-section__eyebrow {
   margin: 0 0 var(--space-3);
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -804,7 +881,7 @@ a:focus-visible {
 }
 
 .trust-section h2 em {
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-style: normal;
 }
 
@@ -815,13 +892,13 @@ a:focus-visible {
   margin: clamp(2rem, 5vw, 3.5rem) 0 0;
   padding: 0;
   list-style: none;
-  background: var(--color-muted);
+  background: var(--fh-border-control);
 }
 
 .trust-card {
   min-width: 0;
   padding: clamp(1.25rem, 3vw, 2rem);
-  background: var(--color-surface);
+  background: var(--fh-surface-card);
 }
 
 .trust-card__index {
@@ -830,8 +907,8 @@ a:focus-visible {
   min-height: 2.35rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
+  border: 1px solid var(--fh-accent);
+  color: var(--fh-accent);
   font-size: 0.7rem;
   font-weight: 850;
   letter-spacing: 0.08em;
@@ -848,7 +925,7 @@ a:focus-visible {
 .trust-card p {
   max-width: 22rem;
   margin: 0.75rem 0 0;
-  color: #5b5752;
+  color: var(--fh-text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
 }
@@ -858,7 +935,7 @@ a:focus-visible {
   align-items: center;
   gap: 0.5rem;
   margin-top: 1.25rem;
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-size: 0.72rem;
   font-weight: 850;
   letter-spacing: 0.08em;
@@ -868,11 +945,11 @@ a:focus-visible {
 }
 
 .trust-card__link:hover {
-  color: var(--color-ink);
+  color: var(--fh-text-primary);
 }
 
 .trust-card a:focus-visible {
-  outline: 3px solid var(--color-accent);
+  outline: 3px solid var(--fh-focus-ring);
   outline-offset: 4px;
 }
 
@@ -895,8 +972,8 @@ a:focus-visible {
   gap: var(--space-5);
   margin-block: clamp(3rem, 8vw, 7rem);
   padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 6vw, 5rem);
-  background: var(--color-accent);
-  color: var(--color-ink);
+  background: var(--fh-accent);
+  color: var(--fh-on-accent);
 }
 
 .notify-section__intro {
@@ -949,24 +1026,29 @@ a:focus-visible {
 .notify-form input,
 .notify-form button {
   min-height: 3.4rem;
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--fh-surface-inverse);
   font: inherit;
 }
 
 .notify-form input {
   min-width: 0;
   padding: 0.8rem 1rem;
-  background: var(--color-surface);
-  color: var(--color-ink);
+  border-color: var(--fh-border-control);
+  background: var(--fh-surface-card);
+  color: var(--fh-text-primary);
 }
 
 .notify-form input::placeholder {
-  color: #6d625b;
+  color: var(--fh-text-secondary);
 }
 
-.notify-form input:focus-visible,
+.notify-form input:focus-visible {
+  outline: 3px solid var(--fh-surface-inverse);
+  outline-offset: 3px;
+}
+
 .notify-form button:focus-visible {
-  outline: 3px solid var(--color-surface);
+  outline: 3px solid var(--fh-surface-inverse);
   outline-offset: 3px;
 }
 
@@ -976,8 +1058,8 @@ a:focus-visible {
   justify-content: center;
   gap: 0.7rem;
   padding: 0.8rem 1.2rem;
-  background: var(--color-ink);
-  color: var(--color-surface);
+  background: var(--fh-surface-inverse);
+  color: var(--fh-text-on-inverse);
   cursor: pointer;
   font-size: 0.78rem;
   font-weight: 850;
@@ -986,8 +1068,8 @@ a:focus-visible {
 }
 
 .notify-form button:hover {
-  background: var(--color-surface);
-  color: var(--color-ink);
+  background: var(--fh-surface-card);
+  color: var(--fh-text-primary);
 }
 
 .notify-form button:disabled {
@@ -1003,7 +1085,7 @@ a:focus-visible {
 }
 
 .notify-form__consent {
-  color: rgb(26 26 26 / 78%);
+  color: var(--fh-on-accent);
 }
 
 .notify-form__status {
@@ -1012,11 +1094,11 @@ a:focus-visible {
 }
 
 .notify-form__status[data-state="error"] {
-  color: #6e1f1f;
+  color: var(--fh-on-accent);
 }
 
 .notify-form__status[data-state="success"] {
-  color: #173e2a;
+  color: var(--fh-on-accent);
 }
 
 .notify-form__target {
@@ -1122,11 +1204,15 @@ a:focus-visible {
   outline-offset: 4px;
 }
 
+.info-dialog button:focus-visible {
+  outline-color: var(--fh-focus-ring);
+}
+
 .site-footer__trial-note {
   grid-column: 1 / -1;
   margin: 0;
   padding-top: var(--space-3);
-  color: var(--color-accent);
+  color: var(--fh-accent-on-inverse);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -1139,9 +1225,9 @@ a:focus-visible {
   max-height: min(86vh, 48rem);
   padding: 0;
   overflow: auto;
-  border: 1px solid var(--color-accent);
-  background: var(--color-surface);
-  color: var(--color-ink);
+  border: 1px solid var(--fh-accent);
+  background: var(--fh-surface-card);
+  color: var(--fh-text-primary);
 }
 
 .info-dialog::backdrop {
@@ -1155,7 +1241,7 @@ a:focus-visible {
 
 .info-dialog__eyebrow {
   margin: 0 0 var(--space-3);
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-size: 0.7rem;
   font-weight: 850;
   letter-spacing: 0.16em;
@@ -1199,18 +1285,22 @@ a:focus-visible {
 }
 
 .info-dialog a {
-  color: var(--color-accent);
+  color: var(--fh-accent);
   font-weight: 750;
   text-underline-offset: 0.2em;
+}
+
+.info-dialog a:focus-visible {
+  outline-color: var(--fh-focus-ring);
 }
 
 .info-dialog__close {
   min-height: 2.9rem;
   margin-top: var(--space-5);
   padding: 0.75rem 1.25rem;
-  border: 1px solid var(--color-ink);
-  background: var(--color-ink);
-  color: var(--color-surface);
+  border: 1px solid var(--fh-surface-inverse);
+  background: var(--fh-surface-inverse);
+  color: var(--fh-text-on-inverse);
   font: inherit;
   font-size: 0.75rem;
   font-weight: 850;
@@ -1220,8 +1310,9 @@ a:focus-visible {
 }
 
 .info-dialog__close:hover {
-  border-color: var(--color-accent);
-  background: var(--color-accent);
+  border-color: var(--fh-accent);
+  background: var(--fh-accent);
+  color: var(--fh-on-accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1231,7 +1322,7 @@ a:focus-visible {
 }
 /* T14 - honest form response state */
 .notify-form__status[data-state="notice"] {
-  color: var(--color-ink);
+  color: var(--fh-on-accent);
 }
 /* T23 — Compact phone navigation while preserving the full Pinterest label. */
 @media (max-width: 47.999rem) {
