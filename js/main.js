@@ -77,6 +77,50 @@ document.querySelectorAll('[data-dialog-close]').forEach((button) => {
 });
 
 document.querySelectorAll('dialog.info-dialog').forEach((dialog) => {
+  dialog.addEventListener('keydown', (event) => {
+    if (
+      event.key !== 'Tab' ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.defaultPrevented
+    ) {
+      return;
+    }
+
+    const focusableElements = Array.from(
+      dialog.querySelectorAll(
+        'a[href], area[href], button, input:not([type="hidden"]), select, textarea, iframe, object, embed, [contenteditable]:not([contenteditable="false"]), [tabindex]'
+      )
+    ).filter((element) => {
+      const style = window.getComputedStyle(element);
+
+      return (
+        element.tabIndex >= 0 &&
+        !element.matches(':disabled') &&
+        !element.closest('[hidden], [inert]') &&
+        style.visibility !== 'hidden' &&
+        style.visibility !== 'collapse' &&
+        element.getClientRects().length > 0
+      );
+    });
+
+    if (focusableElements.length === 0) {
+      return;
+    }
+
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstFocusable) {
+      event.preventDefault();
+      lastFocusable.focus();
+    } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+      event.preventDefault();
+      firstFocusable.focus();
+    }
+  });
+
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) {
       dialog.close();
