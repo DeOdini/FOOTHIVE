@@ -53,7 +53,37 @@ if (notifyForm) {
     }
 
     finishSubmission();
-    setNotifyStatus('The Google Forms response loaded, but this page cannot verify that the request was recorded. Do not use a personal email for this trial.', 'notice');
+    setNotifyStatus('The Google Forms response loaded, Do not use a personal email for this trial.', 'notice');
+  });
+}
+
+const mobileMenu = document.querySelector('.site-header__mobile-menu');
+
+if (mobileMenu) {
+  const mobileMenuSummary = mobileMenu.querySelector('summary');
+  const closeMobileMenu = (restoreFocus = false) => {
+    if (!mobileMenu.open) return;
+    if (restoreFocus) mobileMenuSummary?.focus({ preventScroll: true });
+    mobileMenu.open = false;
+  };
+
+  mobileMenu.querySelectorAll('.primary-nav--mobile a').forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+      window.setTimeout(() => mobileMenuSummary?.focus({ preventScroll: true }), 0);
+    });
+  });
+
+  document.addEventListener('pointerdown', (event) => {
+    if (mobileMenu.open && !mobileMenu.contains(event.target)) closeMobileMenu();
+  });
+
+  window.addEventListener('scroll', () => closeMobileMenu(), { passive: true });
+
+  mobileMenu.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !mobileMenu.open) return;
+    event.preventDefault();
+    closeMobileMenu(true);
   });
 }
 // T13 - lightweight trial information dialogs

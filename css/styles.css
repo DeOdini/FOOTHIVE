@@ -910,6 +910,11 @@ a:focus-visible {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  --story-overlay-rgb: 26, 26, 26;
+}
+
+:root[data-theme="dark"] .story-section__visual {
+  --story-overlay-rgb: 17, 19, 17;
 }
 
 .story-section__visual::before {
@@ -923,8 +928,8 @@ a:focus-visible {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, var(--fh-surface-inverse) 0%, color-mix(in srgb, var(--fh-surface-inverse) 92%, transparent) 34%, color-mix(in srgb, var(--fh-surface-inverse) 46%, transparent) 66%, color-mix(in srgb, var(--fh-surface-inverse) 18%, transparent) 100%),
-    linear-gradient(0deg, color-mix(in srgb, var(--fh-surface-inverse) 74%, transparent), transparent 38%);
+    linear-gradient(90deg, rgba(var(--story-overlay-rgb), 1) 0%, rgba(var(--story-overlay-rgb), 0.97) 20%, rgba(var(--story-overlay-rgb), 0.88) 36%, rgba(var(--story-overlay-rgb), 0.64) 54%, rgba(var(--story-overlay-rgb), 0.34) 74%, rgba(var(--story-overlay-rgb), 0.1) 92%, transparent 100%),
+    linear-gradient(0deg, rgba(var(--story-overlay-rgb), 0.56), transparent 42%);
   content: "";
 }
 
@@ -1616,7 +1621,11 @@ a:focus-visible {
 }
 
 .notify-form__status[data-state="error"] {
-  color: var(--fh-accent);
+  color: #B42318;
+}
+
+:root[data-theme="dark"] .notify-form__status[data-state="error"] {
+  color: #FF6B6B;
 }
 
 .notify-form__status[data-state="success"] {
@@ -2132,6 +2141,30 @@ a:focus-visible {
     height: 44px;
   }
 
+  .site-header__search .product-search {
+    position: fixed;
+    z-index: 30;
+    top: calc(env(safe-area-inset-top, 0px) + 4rem);
+    right: auto;
+    left: 50%;
+    width: min(22rem, calc(100vw - 1rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)));
+    max-width: none;
+    max-height: calc(100vh - 5rem - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - 5rem - env(safe-area-inset-bottom, 0px));
+    overflow: auto;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+  }
+
+  .product-search__controls {
+    min-width: 0;
+  }
+
+  .product-search input {
+    min-width: 0;
+    flex: 1 1 0;
+  }
+
   .site-header .primary-nav--desktop {
     display: none;
   }
@@ -2455,10 +2488,8 @@ a:focus-visible {
 }
 
 .product-section__intro h2 em {
-  color: transparent;
-  background: linear-gradient(108deg, var(--fh-accent) 0%, color-mix(in srgb, var(--fh-accent) 80%, var(--fh-text-primary)) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
+  color: var(--fh-accent);
+  -webkit-text-fill-color: var(--fh-accent);
 }
 
 .product-card__media img {
@@ -2809,11 +2840,10 @@ html {
   .site-header {
     position: sticky;
     top: 0;
-    width: 100%;
-    margin: 0;
-    border: 0;
-    border-bottom: 1px solid var(--fh-border-control);
-    border-radius: 0;
+    width: calc(100% - 1rem);
+    margin: 0 auto;
+    border: 1px solid var(--fh-border-control);
+    border-radius: 999px;
     background: var(--fh-surface-page);
     box-shadow: 0 0.3rem 0.9rem rgb(0 0 0 / 8%);
   }
@@ -2965,51 +2995,13 @@ html {
     inset 0 -2.5rem 2.6rem rgb(255 255 255 / 19%);
 }
 
-/* Keep the shoes sharp while intersecting organic, horizontal and vertical alpha fades. */
+/* Keep the shoes sharp while a single radial alpha mask softens the image edges. */
 .hero-gallery__slide img {
-  --hero-mask-left: 9%;
-  --hero-mask-right: 9%;
-  --hero-mask-top: 5%;
-  --hero-mask-bottom: 88%;
-  --hero-mask-radial-stop: 84%;
-
-  -webkit-mask-image:
-    radial-gradient(ellipse 96% 112% at 50% 48%, #000 var(--hero-mask-radial-stop), transparent 100%),
-    linear-gradient(90deg, transparent 0%, #000 var(--hero-mask-left), #000 calc(100% - var(--hero-mask-right)), transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 var(--hero-mask-top), #000 var(--hero-mask-bottom), transparent 100%);
-  -webkit-mask-composite: source-in, source-in;
-  mask-image:
-    radial-gradient(ellipse 96% 112% at 50% 48%, #000 var(--hero-mask-radial-stop), transparent 100%),
-    linear-gradient(90deg, transparent 0%, #000 var(--hero-mask-left), #000 calc(100% - var(--hero-mask-right)), transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 var(--hero-mask-top), #000 var(--hero-mask-bottom), transparent 100%);
-  mask-composite: intersect;
-}
-
-.hero-gallery__slide[data-slide-name="Blue Blossom Western Boots"] img {
-  --hero-mask-right: 12%;
-  --hero-mask-bottom: 90%;
-}
-
-.hero-gallery__slide[data-slide-name="Navy and Tan Stripe Footwear"] img {
-  --hero-mask-left: 13%;
-  --hero-mask-right: 7%;
-  --hero-mask-top: 6%;
-  --hero-mask-bottom: 88%;
-  --hero-mask-radial-stop: 85%;
-}
-
-.hero-gallery__slide[data-slide-name="Charcoal Tactical Footwear"] img {
-  --hero-mask-left: 8%;
-  --hero-mask-right: 8%;
-  --hero-mask-bottom: 89%;
-  --hero-mask-radial-stop: 85%;
-}
-
-@supports not (mask-composite: intersect) {
-  .hero-gallery__slide img {
-    -webkit-mask-image: radial-gradient(ellipse 96% 112% at 50% 48%, #000 84%, transparent 100%);
-    mask-image: radial-gradient(ellipse 96% 112% at 50% 48%, #000 84%, transparent 100%);
-  }
+  --hero-mask-radial-stop: 70%;
+  -webkit-mask-image: radial-gradient(ellipse 60% 66% at 50% 50%, #000 var(--hero-mask-radial-stop), transparent 100%);
+  mask-image: radial-gradient(ellipse 60% 66% at 50% 50%, #000 var(--hero-mask-radial-stop), transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 /* ADDENDUM-01: theme-aware selection, contrast-safe accents, and footer history. */
@@ -3057,7 +3049,7 @@ html {
   display: inline-flex;
   margin-top: 0.35rem;
   padding: 0.18rem 0.5rem;
-  border: 1px solid color-mix(in srgb, var(--fh-accent-on-inverse) 56%, transparent);
+  border: 1px solid var(--fh-accent-on-inverse);
   border-radius: 999px;
   color: var(--fh-text-on-inverse);
   font-size: 0.72rem;
@@ -3075,4 +3067,16 @@ html {
 
 .hero-gallery__progress {
   background: color-mix(in srgb, var(--hero-border, var(--fh-border-control)) 44%, transparent);
+}
+
+@media (pointer: coarse) {
+  .hero h1,
+  .hero__eyebrow,
+  .product-section__intro h2,
+  .trust-section__heading,
+  .story-section h2,
+  .notify-section h2 {
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
