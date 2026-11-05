@@ -2335,10 +2335,8 @@ a:focus-visible {
 
 .hero h1 em {
   color: var(--hero-accent);
-  background: linear-gradient(108deg, var(--hero-accent) 0%, color-mix(in srgb, var(--hero-accent) 78%, var(--hero-foreground)) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: none;
+  -webkit-text-fill-color: var(--hero-accent);
 }
 
 .hero__eyebrow {
@@ -2995,13 +2993,62 @@ html {
     inset 0 -2.5rem 2.6rem rgb(255 255 255 / 19%);
 }
 
-/* Keep the shoes sharp while a single radial alpha mask softens the image edges. */
-.hero-gallery__slide img {
-  --hero-mask-radial-stop: 70%;
-  -webkit-mask-image: radial-gradient(ellipse 60% 66% at 50% 50%, #000 var(--hero-mask-radial-stop), transparent 100%);
-  mask-image: radial-gradient(ellipse 60% 66% at 50% 50%, #000 var(--hero-mask-radial-stop), transparent 100%);
+/* Apply the approved three-part fade as separate masks to avoid mask-composite. */
+.hero-gallery__slide {
+  --hero-mask-left: 9%;
+  --hero-mask-right: 9%;
+  --hero-mask-top: 5%;
+  --hero-mask-bottom: 88%;
+  --hero-mask-radial-stop: 84%;
+  -webkit-mask-image: radial-gradient(ellipse 96% 112% at 50% 48%, #fff var(--hero-mask-radial-stop), transparent 100%);
+  mask-image: radial-gradient(ellipse 96% 112% at 50% 48%, #fff var(--hero-mask-radial-stop), transparent 100%);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.hero-gallery__image-frame {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #fff var(--hero-mask-left), #fff calc(100% - var(--hero-mask-right)), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #fff var(--hero-mask-left), #fff calc(100% - var(--hero-mask-right)), transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.hero-gallery__slide img {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #fff var(--hero-mask-top), #fff var(--hero-mask-bottom), transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #fff var(--hero-mask-top), #fff var(--hero-mask-bottom), transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.hero-gallery__slide[data-slide-name="Blue Blossom Western Boots"] {
+  --hero-mask-right: 12%;
+  --hero-mask-bottom: 90%;
+}
+
+.hero-gallery__slide[data-slide-name="Navy and Tan Stripe Footwear"] {
+  --hero-mask-left: 13%;
+  --hero-mask-right: 7%;
+  --hero-mask-top: 6%;
+  --hero-mask-bottom: 88%;
+  --hero-mask-radial-stop: 85%;
+}
+
+.hero-gallery__slide[data-slide-name="Charcoal Tactical Footwear"] {
+  --hero-mask-left: 8%;
+  --hero-mask-right: 8%;
+  --hero-mask-bottom: 89%;
+  --hero-mask-radial-stop: 85%;
 }
 
 /* ADDENDUM-01: theme-aware selection, contrast-safe accents, and footer history. */
