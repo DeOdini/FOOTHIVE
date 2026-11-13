@@ -55,6 +55,10 @@
   box-sizing: border-box;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
   background: var(--fh-surface-page);
@@ -3114,16 +3118,4 @@ html {
 
 .hero-gallery__progress {
   background: color-mix(in srgb, var(--hero-border, var(--fh-border-control)) 44%, transparent);
-}
-
-@media (pointer: coarse) {
-  .hero h1,
-  .hero__eyebrow,
-  .product-section__intro h2,
-  .trust-section__heading,
-  .story-section h2,
-  .notify-section h2 {
-    -webkit-user-select: none;
-    user-select: none;
-  }
 }
