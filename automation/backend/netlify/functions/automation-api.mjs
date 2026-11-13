@@ -1,4 +1,4 @@
-import { randomUUID, timingSafeEqual } from 'node:crypto';
+import { timingSafeEqual } from 'node:crypto';
 import pg from 'pg';
 
 // Standalone function: deploy only after configuring the database and API secret.
@@ -60,17 +60,11 @@ export async function handler(event) {
           !validId(body.idempotencyKey) ||
           (body.httpStatus != null && (!Number.isInteger(body.httpStatus) || body.httpStatus < 100 || body.httpStatus > 599)))
           return response(400,{error:'invalid_attempt'});
-        // Only the current claimant may write attempts.
         const { rows } = await db.query(
-          `INSERT INTO foothive_automation.notification_attempts
-           (response_id,channel,outcome,http_status,provider_message_id,error_detail,idempotency_key)
-           SELECT response_id,$3,$4,$5,$6,$7,$8
-           FROM foothive_automation.visitor_processing
-           WHERE response_id=$1 AND claim_token=$2 AND completion_number IS NULL
-           ON CONFLICT (idempotency_key) DO NOTHING RETURNING id`,
+          'SELECT * FROM foothive_automation.record_attempt($1,$2,$3,$4,$5,$6,$7,$8)',
           [body.responseId,body.claimToken,body.channel,body.outcome,
            body.httpStatus ?? null,str(body.providerMessageId,200),str(body.error,1000),body.idempotencyKey]);
-        return response(200,{recorded:rows.length === 1});
+        return response(200,{recorded:rows[0].recorded,duplicate:rows[0].duplicate});
       }
       case 'complete': {
         if (!validId(body.responseId) || !validToken(body.claimToken) || !allowedStates.has(body.state))
