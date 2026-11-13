@@ -56,13 +56,13 @@ test('attempt records use parameterized SQL and token', async () => {
   pg.Pool.prototype.query = async (sql,params) => {
     assert.match(sql,/ON CONFLICT \(idempotency_key\) DO NOTHING/);
     assert.equal(params[2],'whatsmcp');
-    return {rows:[{id:1}]};
+    return {rows:[{recorded:true,duplicate:false}]};
   };
   const r=await request('record_attempt',{
     responseId:'response1',claimToken:'8b8c9954-1bd8-4f72-a3a5-15dd68f82d54',
     channel:'whatsmcp',outcome:'uncertain',idempotencyKey:'response1:whatsmcp:1'
   });
-  assert.deepEqual(body(r),{recorded:true});
+  assert.deepEqual(body(r),{recorded:true,duplicate:false});
 });
 test('completion returns milestone due only from SQL', async () => {
   pg.Pool.prototype.query = async () => ({rows:[{
