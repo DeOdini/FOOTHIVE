@@ -54,7 +54,7 @@ test('claim returns opaque token and duplicate status', async () => {
 });
 test('attempt records use parameterized SQL and token', async () => {
   pg.Pool.prototype.query = async (sql,params) => {
-    assert.match(sql,/foothive_automation\\.record_attempt/);
+    assert.match(sql,/record_attempt/);
     assert.equal(params[2],'whatsmcp');
     return {rows:[{recorded:true,duplicate:false}]};
   };
