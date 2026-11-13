@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "pg": "^8.13.1",
-    "@netlify/database": "*"
+    "@netlify/database": "2.0.3"
   },
   "scripts": {
     "check": "node --check netlify/functions/automation-api.mjs",
