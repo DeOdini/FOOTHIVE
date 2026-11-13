@@ -10,6 +10,7 @@
     "pg": "^8.13.1"
   },
   "scripts": {
-    "check": "node --check netlify/functions/automation-api.mjs"
+    "check": "node --check netlify/functions/automation-api.mjs",
+    "test": "node --test test/*.test.mjs"
   }
 }
