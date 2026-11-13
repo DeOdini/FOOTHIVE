@@ -1,5 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import pg from 'pg';
+import { getConnectionString } from '@netlify/database';
 
 // Standalone function: deploy only after configuring the database and API secret.
 // Never expose this key to the browser; only Activepieces server-side HTTP actions.
@@ -7,7 +8,9 @@ const { Pool } = pg;
 let pool;
 function database() {
   if (!pool) {
-    const connectionString = process.env.FOOTHIVE_AUTOMATION_DATABASE_URL;
+    // An explicit override is reserved for isolated local tests; Netlify selects
+    // the correct database branch automatically in deployed functions.
+    const connectionString = process.env.FOOTHIVE_AUTOMATION_DATABASE_URL || getConnectionString();
     if (!connectionString) throw new Error('database_not_configured');
     pool = new Pool({ connectionString, max: 5, connectionTimeoutMillis: 5000, idleTimeoutMillis: 30000 });
   }
